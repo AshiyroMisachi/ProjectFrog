@@ -1,0 +1,49 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "sceneTest.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "sceneTest.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 894,
+                "y": 2618
+            }
+        },
+        "tileset_test.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/riall/Documents/GitHub/ProjectFrog/assets/json",
+    "last.externalTilesetPath": "C:/Users/riall/Documents/GitHub/ProjectFrog/maps",
+    "last.imagePath": "C:/Users/riall/Documents/GitHub/ProjectFrog/maps",
+    "map.height": 50,
+    "map.lastUsedExportFilter": "Fichiers de carte JSON (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 50,
+    "openFiles": [
+        "sceneTest.tmx"
+    ],
+    "project": "ProjectFrog.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "sceneTest.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
