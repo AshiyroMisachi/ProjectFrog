@@ -4,14 +4,19 @@ export class Preload extends Phaser.Scene {
     }
     
     preload(){
+        //Map Tiled
 
+        //SpriteSheet
+
+        //Image
+        this.load.image('logoMainScreen', "../assets/logoMainScreen.png");
     }
 
     create(){
-        this.scene.start("sceneTest");
+
     }
 
     update(){
-
+        this.scene.start("mainScreen");
     }
 }

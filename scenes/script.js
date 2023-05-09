@@ -2,7 +2,7 @@
 import { Preload } from "./preload.js";
 import { MainScreen } from "./mainScreen.js";
 import { SceneTest as SceneTest } from "./sceneTest.js";
-import { UiScene as UiScene } from "./ui-scene";
+import { UiScene } from "./ui-scene.js";
 
 ///EVENT EMITER///
 const eventsCenter = new Phaser.Events.EventEmitter()

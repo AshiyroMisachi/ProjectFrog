@@ -1,6 +1,13 @@
 export class MainScreen extends Phaser.Scene {
     constructor() {
-        super("mainScreen");
+        super({
+            key: 'first',
+            physics: {
+            default: 'arcade',
+            arcade: { 
+            gravity: { y: 0 }
+            }}
+        });
     }
     
     preload(){
@@ -8,7 +15,8 @@ export class MainScreen extends Phaser.Scene {
     }
 
     create(){
-
+        console.log("Test")
+        this.logo = this.add.image(0, 0, "logoMainScreen").setInteractive();
     }
 
     update(){
