@@ -1,7 +1,7 @@
 export class MainScreen extends Phaser.Scene {
     constructor() {
         super({
-            key: 'first',
+            key: 'mainScreen',
             physics: {
             default: 'arcade',
             arcade: { 
@@ -15,11 +15,19 @@ export class MainScreen extends Phaser.Scene {
     }
 
     create(){
-        console.log("Test")
-        this.logo = this.add.image(0, 0, "logoMainScreen").setInteractive();
+        //Add Image
+        this.logo = this.add.image(400, 150, "logoMainScreen").setInteractive().setScale(0.75).setOrigin( 0, 0);
+        this.launchButton = this.add.image(350, 700, "launchGame").setInteractive().setScale(1.25).setOrigin( 0, 0);
+
+        //Create Interaction
+        this.launchButton.on("pointerdown", this.launchGame, this);
     }
 
     update(){
 
+    }
+
+    launchGame() {
+        this.scene.start("sceneTest");
     }
 }

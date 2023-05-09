@@ -11,11 +11,11 @@ export default eventsCenter
 //Creation Game
 var config = {
     type: Phaser.AUTO,
-    width: 800, height: 600,
+    width: 1472, height: 1088,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 800 },
             debug: false
         }
     },
