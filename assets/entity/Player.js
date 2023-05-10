@@ -17,9 +17,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.inJump = false;
         this.inAction = false;
         this.inWater = false;
+        this.directionX = "";
+        this.directionY = "";
 
         //Parametre
-        
+        this.setOrigin(0.5,0.5)
 
         //Controle Key
         this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -101,6 +103,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
      update(){
         //Déplacement Terre
         if (this.inWater == false){
+            this.setGravity(0, 0);
             if ( this.inAction == false){
                 //Crounch
                 if (this.keyS.isDown) {
@@ -171,10 +174,79 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 this.setVelocityY(-this.jumpSpeed*1.5);
             }
         }
+        //Nage
+        else {
+            //Setup
+            this.anims.play('swim');
+            this.speed = 400
+
+            //Déplacement
+            if (this.keyQ.isDown) { 
+                this.setVelocityX(-this.speed);
+                this.directionX = "left";
+            }
+            else if (this.keyD.isDown) { 
+                this.setVelocityX(this.speed);
+                this.directionX = "right"; 
+            }
+            else {
+                this.setVelocityX(0);
+                this.directionX = "";
+            }
+
+            if (this.keyS.isDown) { 
+                this.setVelocityY(this.speed);
+                this.directionY = "down"; 
+            }
+            else if (this.keyZ.isDown) {
+                this.setVelocityY(-this.speed);
+                this.directionY = "up"; 
+            }
+            else {
+                this.directionY = ""; 
+                if (this.body.velocity.y > 50){
+                    this.setVelocityY(this.body.velocity.y - 12);
+                }
+                else {
+                    this.setVelocityY(50)
+                }
+            }
+
+            //Rotate
+            if (this.directionX == "left" && this.directionY == "down"){
+                this.setAngle(-135)
+            }
+            else if (this.directionX == "left" && this.directionY == "up"){
+                this.setAngle(-45)
+            }
+            else if (this.directionX == "right" && this.directionY == "down"){
+                this.setAngle(135)
+            }
+            else if (this.directionX == "right" && this.directionY == "up"){
+                this.setAngle(45)
+            }
+            else if (this.directionX == "right"){
+                this.setAngle(90);
+            }
+            else if (this.directionX == "left"){
+                this.setAngle(-90)
+            }
+            else if (this.directionY == "down"){
+                this.setAngle(-180);
+            }
+            else if (this.directionY == "up"){
+                this.setAngle(180);
+            }
+            else {
+                this.setAngle(0);
+            }
+            
+            //Dash
+        };
+
     }
-        
 
      enterWater() {
-        this.inWater = true;
+        this.time.delayedCall(0, () => { this.player.inWater = true}, [], this);
      }
 }

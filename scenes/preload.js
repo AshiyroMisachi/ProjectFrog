@@ -15,6 +15,9 @@ export class Preload extends Phaser.Scene {
         //Image
         this.load.image('logoMainScreen', "../assets/logoMainScreen.png");
         this.load.image('launchGame', "../assets/launchGame.png");
+
+        //DevIMG
+        this.load.image('waterCheckIMG', '../assets/waterCheck.png');
     }
 
     create(){
