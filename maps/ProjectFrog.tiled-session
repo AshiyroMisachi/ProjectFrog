@@ -13,15 +13,16 @@
             "scaleInEditor": 1
         },
         "sceneTest.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "scale": 0.25,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 894,
-                "y": 2618
+                "x": 1476,
+                "y": 2076
             }
         },
         "tileset_test.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
     "last.exportedFilePath": "C:/Users/riall/Documents/GitHub/ProjectFrog/assets/json",
@@ -34,11 +35,13 @@
     "map.tileWidth": 64,
     "map.width": 50,
     "openFiles": [
-        "sceneTest.tmx"
+        "sceneTest.tmx",
+        "tileset_test.tsx"
     ],
     "project": "ProjectFrog.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "tileset_test.tsx",
         "sceneTest.tmx"
     ],
     "tileset.embedInMap": true,

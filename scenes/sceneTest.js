@@ -14,12 +14,13 @@ export class SceneTest extends Phaser.Scene {
         this.tileset = this.carteDuNiveau.addTilesetImage( "tileset_test", "tileset_Test" );
 
         this.wall = this.carteDuNiveau.createLayer( "base", this.tileset );
+        this.water = this.carteDuNiveau.createLayer( "eau", this.tileset );
         
         //SetCollision
         this.wall.setCollisionByProperty({isSolid: true});
 
         //Création Joueur
-        this.player = new Player(this, 100, 450).setBounce(0);
+        this.player = new Player(this, 100, 450);
         this.player.setCollideWorldBounds(true);
 
         //Création Caméra
@@ -29,6 +30,7 @@ export class SceneTest extends Phaser.Scene {
 
         //Création Collision
         this.physics.add.collider(this.player, this.wall);
+        this.physics.add.collider(this.player, this.water, this.player.enterWater, null, this);
     }
 
     update(){
