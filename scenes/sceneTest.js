@@ -23,7 +23,7 @@ export class SceneTest extends Phaser.Scene {
         //Création Objet
         this.waterCheck = this.physics.add.staticGroup();
         this.calque_waterCheck.objects.forEach(calque_waterCheck => {
-            const POwaterCheck = this.waterCheck.create(calque_waterCheck.x + 32, calque_waterCheck.y + 64, "waterCheckIMG");
+            const POwaterCheck = this.waterCheck.create(calque_waterCheck.x + 32, calque_waterCheck.y + 32, "waterCheckIMG");
         });
 
         //Création Joueur
