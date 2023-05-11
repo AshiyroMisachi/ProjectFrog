@@ -1,6 +1,6 @@
 //import eventsCenter from "./EventsCenter.js"
 export class Player extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y){
+    constructor(scene, x, y) {
         super(scene, x, y, "perso");
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -9,7 +9,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.initEvents();
     }
 
-     init(){
+    init() {
         //Variable perso
         this.speed = 300;
         this.jumpSpeed = 660;
@@ -23,7 +23,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.directionY = "";
 
         //Parametre
-        this.setOrigin(0.5,0.5)
+        this.setOrigin(0.5, 0.5)
 
         //Controle Key
         this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -35,7 +35,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         //Anims
-        if (true){
+        if (true) {
             this.anims.create({
                 key: 'turn',
                 frames: [{ key: 'perso', frame: 0 }],
@@ -96,81 +96,82 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 frameRate: 20
             });
         }
-     }
+    }
 
-     initEvents(){
+    initEvents() {
         this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
-     }
+    }
 
-     update(){
-        
+    update() {
+
         //Déplacement Terre
-        if (this.inWater == false){
+        if (this.inWater == false) {
             //Setup
             this.setGravity(0, 0);
             this.setSize(128, 256);
             this.setAngle(0);
+            this.body.setMaxSpeed(10000);
 
-            if ( this.inAction == false){
+            if (this.inAction == false) {
                 //Crounch
                 if (this.keyS.isDown) {
                     this.speed = 150;
-                    if (this.keyQ.isDown) { 
-                        this.setVelocityX(-this.speed); 
-                        this.anims.play('crounchLeft', true); 
+                    if (this.keyQ.isDown) {
+                        this.setVelocityX(-this.speed);
+                        this.anims.play('crounchLeft', true);
                     }
-                    else if (this.keyD.isDown) { 
-                        this.setVelocityX(this.speed); 
-                        this.anims.play('crounchRight', true); 
+                    else if (this.keyD.isDown) {
+                        this.setVelocityX(this.speed);
+                        this.anims.play('crounchRight', true);
                     }
-                    else { 
-                        this.setVelocityX(0); 
-                        this.anims.play('crounch'); 
+                    else {
+                        this.setVelocityX(0);
+                        this.anims.play('crounch');
                     }
                 }
                 //Normal
                 else {
                     this.speed = 300;
-                    if (this.keyQ.isDown) { 
-                        this.setVelocityX(-this.speed); 
-                        this.anims.play('left', true); 
+                    if (this.keyQ.isDown) {
+                        this.setVelocityX(-this.speed);
+                        this.anims.play('left', true);
                     }
-                    else if (this.keyD.isDown) { 
-                        this.setVelocityX(this.speed); 
-                        this.anims.play('right', true); 
+                    else if (this.keyD.isDown) {
+                        this.setVelocityX(this.speed);
+                        this.anims.play('right', true);
                     }
-                    else { 
-                        this.setVelocityX(0); 
-                        this.anims.play('turn'); 
+                    else {
+                        this.setVelocityX(0);
+                        this.anims.play('turn');
                     }
                 }
             }
-            
+
             //Saut
             if (this.keySpace.isDown && this.body.blocked.down) {
-                this.chargeJump +=1;
+                this.chargeJump += 1;
                 this.inJump = true;
                 console.log(this.chargeJump)
-                if (this.chargeJump > 20){
+                if (this.chargeJump > 20) {
                     this.inAction = true;
                     this.setVelocityX(0);
-                    this.anims.play('chargeJump'); 
+                    this.anims.play('chargeJump');
                 }
             }
             //Jump C0
-            if (this.keySpace.isUp && this.inJump && this.chargeJump <= 20 && this.body.blocked.down){
+            if (this.keySpace.isUp && this.inJump && this.chargeJump <= 20 && this.body.blocked.down) {
                 console.log("Jump C0");
                 this.inJump = false;
                 this.chargeJump = 0;
                 this.setVelocityY(-this.jumpSpeed);
             }
             //Jump c1
-            else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 20 && this.chargeJump <= 40)){
+            else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 20 && this.chargeJump <= 40)) {
                 console.log("Jump C1");
                 this.inJump = false;
                 this.chargeJump = 0;
                 this.inAction = false;
-                this.setVelocityY(-this.jumpSpeed*1.3);
+                this.setVelocityY(-this.jumpSpeed * 1.3);
             }
             //JumpC2
             else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 40)) {
@@ -178,9 +179,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 this.inJump = false;
                 this.chargeJump = 0;
                 this.inAction = false;
-                this.setVelocityY(-this.jumpSpeed*1.5);
+                this.setVelocityY(-this.jumpSpeed * 1.5);
             }
-            if (!this.body.blocked.down){
+            if (!this.body.blocked.down) {
                 this.chargeJump = 0;
                 this.inJump = false;
             }
@@ -192,145 +193,146 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.inWater = false;
             this.anims.play('swim');
             this.speed = 400
-            this.scene.time.delayedCall(200, ()=> (this.setSize( 128, 192)), [], this)
+            this.scene.time.delayedCall(200, () => (this.setSize(128, 192)), [], this)
 
             //Déplacement
-            if (this.keyQ.isDown) { 
-                if (this.body.velocity.x < -this.speed){
-                    this.setVelocityX(this.body.velocity.x + 30);
+            if (this.inAction == false) {
+                if (this.keyQ.isDown) {
+                    if (this.body.velocity.x < -this.speed) {
+                        this.setVelocityX(this.body.velocity.x + 20);
+                    }
+                    else {
+                        this.setVelocityX(-this.speed);
+                    }
+                    this.directionX = "left";
+                }
+                else if (this.keyD.isDown) {
+                    if (this.body.velocity.x > this.speed) {
+                        this.setVelocityX(this.body.velocity.x - 20);
+                    }
+                    else {
+                        this.setVelocityX(this.speed);
+                    }
+                    this.directionX = "right";
                 }
                 else {
-                    this.setVelocityX(-this.speed);
+                    if (this.body.velocity.x < 0) {
+                        this.setVelocityX(this.body.velocity.x + 20);
+                    }
+                    else if (this.body.velocity.x > 0) {
+                        this.setVelocityX(this.body.velocity.x - 20);
+                    }
+                    else {
+                        this.setVelocityX(0);
+                    }
+                    this.directionX = "";
                 }
-                this.directionX = "left"; 
-            }
-            else if (this.keyD.isDown) { 
-                if (this.body.velocity.x > this.speed){
-                    this.setVelocityX(this.body.velocity.x - 30);
-                }
-                else {
-                    this.setVelocityX(this.speed);
-                }
-                this.directionX = "right"; 
-            }
-            else {
-                if (this.body.velocity.x < 0){
-                    this.setVelocityX(this.body.velocity.x + 30);
-                }
-                else if (this.body.velocity.x > 0){
-                    this.setVelocityX(this.body.velocity.x - 30);
-                }
-                else {
-                    this.setVelocityX(0);
-                }
-                this.directionX = ""; 
-            }
 
-            if (this.keyS.isDown) { 
-                if (this.body.velocity.y > this.speed){
-                    this.setVelocityY(this.body.velocity.y - 20);
+                if (this.keyS.isDown) {
+                    if (this.body.velocity.y > this.speed) {
+                        this.setVelocityY(this.body.velocity.y - 20);
+                    }
+                    else {
+                        this.setVelocityY(this.speed);
+                    }
+                    this.directionY = "down";
+                }
+                else if (this.keyZ.isDown) {
+                    if (this.body.velocity.y < -this.speed) {
+                        this.setVelocityY(this.body.velocity.y + 20);
+                    }
+                    else {
+                        this.setVelocityY(-this.speed);
+                    }
+                    this.directionY = "up";
                 }
                 else {
-                    this.setVelocityY(this.speed);
+                    if (this.body.velocity.y < 0) {
+                        this.setVelocityY(this.body.velocity.y + 20);
+                    }
+                    else if (this.body.velocity.y > 40) {
+                        this.setVelocityY(this.body.velocity.y - 20);
+                    }
+                    else {
+                        this.setVelocityY(40);
+                    }
+                    this.directionY = "";
                 }
-                this.directionY = "down"; 
-            }
-            else if (this.keyZ.isDown) {
-                if (this.body.velocity.y < -this.speed){
-                    this.setVelocityY(this.body.velocity.y + 20);
-                }
-                else {
-                    this.setVelocityY(-this.speed);
-                }
-                this.directionY = "up"; 
-            }
-            else {
-                if (this.body.velocity.y < 0){
-                    this.setVelocityY(this.body.velocity.y + 20);
-                }
-                else if (this.body.velocity.y > 40){
-                    this.setVelocityY(this.body.velocity.y - 20);
-                }
-                else {
-                    this.setVelocityY(40);
-                }
-                this.directionY = ""; 
             }
 
             //Rotate
-            if (this.directionX == "left" && this.directionY == "down"){
+            if (this.directionX == "left" && this.directionY == "down") {
                 this.setAngle(-135)
             }
-            else if (this.directionX == "left" && this.directionY == "up"){
+            else if (this.directionX == "left" && this.directionY == "up") {
                 this.setAngle(-45)
             }
-            else if (this.directionX == "right" && this.directionY == "down"){
+            else if (this.directionX == "right" && this.directionY == "down") {
                 this.setAngle(135)
             }
-            else if (this.directionX == "right" && this.directionY == "up"){
+            else if (this.directionX == "right" && this.directionY == "up") {
                 this.setAngle(45)
             }
-            else if (this.directionX == "right"){
+            else if (this.directionX == "right") {
                 this.setAngle(90);
 
             }
-            else if (this.directionX == "left"){
+            else if (this.directionX == "left") {
                 this.setAngle(-90)
 
             }
-            else if (this.directionY == "down"){
+            else if (this.directionY == "down") {
                 this.setAngle(-180);
             }
-            else if (this.directionY == "up"){
+            else if (this.directionY == "up") {
                 this.setAngle(180);
             }
             else {
                 this.setAngle(0);
             }
-            
+
             //Dash
-            if (this.cdDash == false){
+            if (this.cdDash == false) {
                 if (this.keySpace.isDown) {
-                    if (this.directionX == "left" && this.directionY == "down"){
+                    if (this.directionX == "left" && this.directionY == "down") {
                         this.setVelocityX(-this.dashSpeed);
                         this.setVelocityY(this.dashSpeed);
                     }
-                    else if (this.directionX == "right" && this.directionY == "down"){
+                    else if (this.directionX == "right" && this.directionY == "down") {
                         this.setVelocityX(this.dashSpeed);
                         this.setVelocityY(this.dashSpeed);
                     }
-                    else if (this.directionX == "left" && this.directionY == "up"){
+                    else if (this.directionX == "left" && this.directionY == "up") {
                         this.setVelocityX(-this.dashSpeed);
                         this.setVelocityY(-this.dashSpeed);
                     }
-                    else if (this.directionX == "right" && this.directionY == "up"){
+                    else if (this.directionX == "right" && this.directionY == "up") {
                         this.setVelocityX(this.dashSpeed);
                         this.setVelocityY(-this.dashSpeed);
                     }
-                    else if (this.directionX == "left"){
+                    else if (this.directionX == "left") {
                         this.setVelocityX(-this.dashSpeed);
                     }
-                    else if (this.directionX == "right"){
+                    else if (this.directionX == "right") {
                         this.setVelocityX(this.dashSpeed);
                     }
-                    else if (this.directionY == "up"){
+                    else if (this.directionY == "up") {
                         this.setVelocityY(-this.dashSpeed);
                     }
-                    else if (this.directionY == "down"){
+                    else if (this.directionY == "down") {
                         this.setVelocityY(this.dashSpeed);
                     }
-                    if (this.directionX != "" || this.directionY != ""){
+                    if (this.directionX != "" || this.directionY != "") {
                         this.cdDash = true;
-                        this.scene.time.delayedCall(1000, ()=> { this.cdDash = false; console.log("Dash back")}, [], this);
+                        this.scene.time.delayedCall(1000, () => { this.cdDash = false; console.log("Dash back") }, [], this);
                     }
                 }
             }
-        };
-
+        }
     }
 
-     enterWater(player) {
-            player.inWater = true;
-     }
+    enterWater(player) {
+        player.inWater = true;
+    }
 
 }
