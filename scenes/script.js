@@ -17,9 +17,9 @@ var config = {
         arcade: {
             gravity: { y: 800 },
             debug: true,
-            fps: {target: 60, forceSetTimeout: true}
-        }
+        },
     },
+    fps: {target: 60, forceSetTimeOut: true},
     scene: [Preload, MainScreen, SceneTest, UiScene]
 }
 
