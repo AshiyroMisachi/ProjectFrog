@@ -16,9 +16,11 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 800 },
-            debug: true
+            debug: true,
+            fps: {target: 60, forceSetTimeout: true}
         }
     },
     scene: [Preload, MainScreen, SceneTest, UiScene]
 }
+
 export var game = new Phaser.Game(config);

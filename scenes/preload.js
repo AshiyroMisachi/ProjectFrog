@@ -21,7 +21,7 @@ export class Preload extends Phaser.Scene {
     }
 
     create(){
-
+        
     }
 
     update(){

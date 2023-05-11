@@ -10,6 +10,7 @@ export class SceneTest extends Phaser.Scene {
     }
 
     create(){
+        console.log(game.loop);
         //Load Tiled
         this.carteDuNiveau = this.add.tilemap("sceneTest");
         this.tileset = this.carteDuNiveau.addTilesetImage( "tileset_test", "tileset_Test" );
@@ -43,6 +44,6 @@ export class SceneTest extends Phaser.Scene {
     }
 
     update(){
-        console.log(game.loop.actualFps);
+        
     }
 }
