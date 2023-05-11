@@ -21,4 +21,4 @@ var config = {
     },
     scene: [Preload, MainScreen, SceneTest, UiScene]
 }
-new Phaser.Game(config);
+export var game = new Phaser.Game(config);

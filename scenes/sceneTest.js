@@ -1,4 +1,5 @@
 import { Player } from "../assets/entity/Player.js";
+import { game } from "./script.js";
 export class SceneTest extends Phaser.Scene {
     constructor() {
         super("sceneTest");
@@ -42,6 +43,6 @@ export class SceneTest extends Phaser.Scene {
     }
 
     update(){
-        
+        console.log(game.loop.actualFps);
     }
 }
