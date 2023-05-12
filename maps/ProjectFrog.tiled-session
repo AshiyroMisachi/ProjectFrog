@@ -12,12 +12,39 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
-        "sceneTest.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 2,
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx": {
+            "expandedObjectLayers": [
+                15,
+                4
+            ],
+            "scale": 0.5413020833333333,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 786,
-                "y": 2330
+                "x": 960.6465890503223,
+                "y": 184.73972866352358
+            }
+        },
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx#bg_test": {
+            "scaleInDock": 1
+        },
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx#bg_test_2": {
+            "scaleInDock": 1
+        },
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx#bg_test_3": {
+            "scaleInDock": 1
+        },
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx#tileset": {
+            "scaleInDock": 1
+        },
+        "sceneTest.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 782,
+                "y": 1534
             }
         },
         "tileset_test.tsx": {
@@ -36,11 +63,13 @@
     "map.width": 50,
     "openFiles": [
         "sceneTest.tmx",
-        "tileset_test.tsx"
+        "tileset_test.tsx",
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx"
     ],
     "project": "ProjectFrog.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx",
         "tileset_test.tsx",
         "sceneTest.tmx"
     ],

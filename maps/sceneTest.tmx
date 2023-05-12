@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="466">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="469">
  <editorsettings>
   <export target="../assets/json/sceneTest.json" format="json"/>
  </editorsettings>
@@ -114,5 +114,16 @@
  </layer>
  <objectgroup id="3" name="waterCheck">
   <object id="10" x="64" y="1856" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup id="4" name="placeHat">
+  <object id="466" name="hat" type="grab" x="1166" y="1450">
+   <point/>
+  </object>
+  <object id="467" name="hat" type="grow" x="1354" y="1184">
+   <point/>
+  </object>
+  <object id="468" name="hat" type="fire" x="1576" y="1334">
+   <point/>
+  </object>
  </objectgroup>
 </map>

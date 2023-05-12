@@ -5,8 +5,7 @@ import { SceneTest as SceneTest } from "./sceneTest.js";
 import { UiScene } from "./ui-scene.js";
 
 ///EVENT EMITER///
-const eventsCenter = new Phaser.Events.EventEmitter()
-export default eventsCenter
+export const eventsCenter = new Phaser.Events.EventEmitter()
 
 //Creation Game
 var config = {

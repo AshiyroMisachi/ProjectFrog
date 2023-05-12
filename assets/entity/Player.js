@@ -1,4 +1,5 @@
-//import eventsCenter from "./EventsCenter.js"
+import {eventsCenter} from "../../scenes/script.js";
+import { TongEnd } from "./TongEnd.js";
 export class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, "perso");
@@ -18,9 +19,18 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.cdDash = false;
         this.inJump = false;
         this.inAction = false;
+        this.inShoot = false;
         this.inWater = false;
-        this.directionX = "";
+        this.directionX = "right";
         this.directionY = "";
+        this.langue = new Phaser.GameObjects.Group;
+        this.shoot = null;
+
+        this.unlockGrab = false;
+        this.unlockGrow = false;
+        this.unlockFire = false;
+        //0: Grab 1:Grow 2:Fire
+        this.unlock = [false, false, false]
 
         //Parametre
         this.setOrigin(0.5, 0.5)
@@ -32,6 +42,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.keyZ = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.keyS = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.keyI = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+        this.keyO = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
         this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         //Anims
@@ -110,7 +122,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.setGravity(0, 0);
             this.setSize(128, 256);
             this.setAngle(0);
-            this.body.setMaxSpeed(10000);
 
             if (this.inAction == false) {
                 //Crounch
@@ -119,10 +130,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                     if (this.keyQ.isDown) {
                         this.setVelocityX(-this.speed);
                         this.anims.play('crounchLeft', true);
+                        this.directionX = "left";
                     }
                     else if (this.keyD.isDown) {
                         this.setVelocityX(this.speed);
                         this.anims.play('crounchRight', true);
+                        this.directionX = "right";
                     }
                     else {
                         this.setVelocityX(0);
@@ -135,20 +148,37 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                     if (this.keyQ.isDown) {
                         this.setVelocityX(-this.speed);
                         this.anims.play('left', true);
+                        this.directionX = "left";
                     }
                     else if (this.keyD.isDown) {
                         this.setVelocityX(this.speed);
                         this.anims.play('right', true);
+                        this.directionX = "right";
                     }
                     else {
                         this.setVelocityX(0);
                         this.anims.play('turn');
                     }
                 }
+
+                //Tire
+                if (Phaser.Input.Keyboard.JustDown(this.keyI)) {
+                    this.inAction = true;
+                    this.inShoot = true;
+                    this.setVelocityX(0);
+                    if (this.directionX == "right") {
+                        this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 32);
+                    }
+                    else {
+                        this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 32);
+                    }
+                    this.shoot.getPlayer(this, this.directionX);
+                    this.langue.add(this.shoot);
+                }
             }
 
             //Saut
-            if (this.keySpace.isDown && this.body.blocked.down) {
+            if (this.keySpace.isDown && this.body.blocked.down && this.inShoot == false) {
                 this.chargeJump += 1;
                 this.inJump = true;
                 console.log(this.chargeJump)
@@ -185,6 +215,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 this.chargeJump = 0;
                 this.inJump = false;
             }
+
         }
         //Nage
         else {
@@ -199,7 +230,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             if (this.inAction == false) {
                 if (this.keyQ.isDown) {
                     if (this.body.velocity.x < -this.speed) {
-                        this.setVelocityX(this.body.velocity.x + 20);
+                        this.setVelocityX(this.body.velocity.x + 10);
                     }
                     else {
                         this.setVelocityX(-this.speed);
@@ -208,7 +239,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 }
                 else if (this.keyD.isDown) {
                     if (this.body.velocity.x > this.speed) {
-                        this.setVelocityX(this.body.velocity.x - 20);
+                        this.setVelocityX(this.body.velocity.x - 10);
                     }
                     else {
                         this.setVelocityX(this.speed);
@@ -217,10 +248,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.body.velocity.x < 0) {
-                        this.setVelocityX(this.body.velocity.x + 20);
+                        this.setVelocityX(this.body.velocity.x + 10);
                     }
                     else if (this.body.velocity.x > 0) {
-                        this.setVelocityX(this.body.velocity.x - 20);
+                        this.setVelocityX(this.body.velocity.x - 10);
                     }
                     else {
                         this.setVelocityX(0);
@@ -230,7 +261,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
                 if (this.keyS.isDown) {
                     if (this.body.velocity.y > this.speed) {
-                        this.setVelocityY(this.body.velocity.y - 20);
+                        this.setVelocityY(this.body.velocity.y - 10);
                     }
                     else {
                         this.setVelocityY(this.speed);
@@ -239,7 +270,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 }
                 else if (this.keyZ.isDown) {
                     if (this.body.velocity.y < -this.speed) {
-                        this.setVelocityY(this.body.velocity.y + 20);
+                        this.setVelocityY(this.body.velocity.y + 10);
                     }
                     else {
                         this.setVelocityY(-this.speed);
@@ -248,10 +279,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.body.velocity.y < 0) {
-                        this.setVelocityY(this.body.velocity.y + 20);
+                        this.setVelocityY(this.body.velocity.y + 10);
                     }
                     else if (this.body.velocity.y > 40) {
-                        this.setVelocityY(this.body.velocity.y - 20);
+                        this.setVelocityY(this.body.velocity.y - 10);
                     }
                     else {
                         this.setVelocityY(40);
@@ -328,6 +359,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                     }
                 }
             }
+        }
+
+        //Switch Chapeau
+        if (Phaser.Input.Keyboard.JustDown(this.keyO)){
+            console.log("CHAPO")
         }
     }
 
