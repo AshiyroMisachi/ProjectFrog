@@ -39,13 +39,21 @@ export class UiScene extends Phaser.Scene
 			frameRate: 20
 		});
 		this.cadre.anims.play('empty');
-
-		this.currentHat = "empty";
-
-        eventsCenter.on('update-count', this.switchHat, this);
+        eventsCenter.on('switchHat', this.switchHat, this);
 	}
 
-	switchHat() {
-
+	switchHat(currentHat) {
+		if (currentHat == 0){
+			this.cadre.anims.play('empty');
+		}
+		else if (currentHat == 1){
+			this.cadre.anims.play('grab');
+		}
+		else if (currentHat == 2){
+			this.cadre.anims.play('grow');
+		}
+		else if (currentHat == 3){
+			this.cadre.anims.play('fire');
+		}
 	}
 }

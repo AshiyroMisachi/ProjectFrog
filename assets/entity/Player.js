@@ -26,11 +26,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.langue = new Phaser.GameObjects.Group;
         this.shoot = null;
 
-        this.unlockGrab = false;
-        this.unlockGrow = false;
-        this.unlockFire = false;
         //0: Grab 1:Grow 2:Fire
         this.unlock = [false, false, false]
+        this.currentHat = 0;
 
         //Parametre
         this.setOrigin(0.5, 0.5)
@@ -181,7 +179,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             if (this.keySpace.isDown && this.body.blocked.down && this.inShoot == false) {
                 this.chargeJump += 1;
                 this.inJump = true;
-                console.log(this.chargeJump)
                 if (this.chargeJump > 20) {
                     this.inAction = true;
                     this.setVelocityX(0);
@@ -363,7 +360,22 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         //Switch Chapeau
         if (Phaser.Input.Keyboard.JustDown(this.keyO)){
-            console.log("CHAPO")
+            if (this.currentHat != 3) {
+                this.currentHat += 1;
+            }
+            else {
+                this.currentHat = 0;
+            }
+            if (this.unlock[0] == false && this.currentHat == 1){
+                this.currentHat += 1;
+            }
+            if (this.unlock[1] == false && this.currentHat == 2){
+                this.currentHat += 1;
+            }
+            if (this.unlock[2] == false && this.currentHat == 3){
+                this.currentHat = 0;
+            }
+            eventsCenter.emit('switchHat', this.currentHat);
         }
     }
 
