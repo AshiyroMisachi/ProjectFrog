@@ -23,9 +23,9 @@ export class SceneTest extends Phaser.Scene {
         this.wall.setCollisionByProperty({isSolid: true});
 
         //Création Objet
-        this.waterCheck = this.physics.add.staticGroup();
+        this.waterCheck = this.physics.add.group({allowGravity: false});
         this.calque_waterCheck.objects.forEach(calque_waterCheck => {
-            const POwaterCheck = this.waterCheck.create(calque_waterCheck.x + 32, calque_waterCheck.y + 32, "waterCheckIMG");
+            const POwaterCheck = this.waterCheck.create(calque_waterCheck.x+672, calque_waterCheck.y+640, "waterCheckIMG");
         });
 
         //Création Joueur
@@ -40,7 +40,6 @@ export class SceneTest extends Phaser.Scene {
         //Création Collision
         this.physics.add.collider(this.player, this.wall);
         this.physics.add.overlap(this.player, this.waterCheck, this.player.enterWater, null, this);
-        
     }
 
     update(){
