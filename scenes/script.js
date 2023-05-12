@@ -19,7 +19,8 @@ var config = {
             debug: true,
         },
     },
-    fps: {target: 30, forceSetTimeOut: true},
+    fps: {target: 60, forceSetTimeOut: true},
+    pixelArt: true,
     scene: [Preload, MainScreen, SceneTest, UiScene]
 }
 
