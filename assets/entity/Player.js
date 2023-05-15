@@ -1,4 +1,4 @@
-import {eventsCenter} from "../../scenes/script.js";
+import { eventsCenter } from "../../scenes/script.js";
 import { TongEnd } from "./TongEnd.js";
 export class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
@@ -17,6 +17,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.dashSpeed = 900;
         this.chargeJump = 0;
         this.cdDash = false;
+        this.inCrounch = false;
         this.inJump = false;
         this.inAction = false;
         this.inShoot = false;
@@ -118,65 +119,75 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.inWater == false) {
             //Setup
             this.setGravity(0, 0);
-            this.setSize(128, 256);
             this.setAngle(0);
-
-            if (this.inAction == false) {
-                //Crounch
-                if (this.keyS.isDown) {
-                    this.speed = 150;
-                    if (this.keyQ.isDown) {
-                        this.setVelocityX(-this.speed);
-                        this.anims.play('crounchLeft', true);
-                        this.directionX = "left";
-                    }
-                    else if (this.keyD.isDown) {
-                        this.setVelocityX(this.speed);
-                        this.anims.play('crounchRight', true);
-                        this.directionX = "right";
-                    }
-                    else {
-                        this.setVelocityX(0);
-                        this.anims.play('crounch');
-                    }
+            //Crounch
+            if (this.keyS.isDown && this.inJump != true && this.inAction == false) {
+                this.setSize(128, 192);
+                this.setOffset(0, 64);
+                this.inCrounch = true;
+                this.speed = 150;
+                if (this.keyQ.isDown){
+                    this.setVelocityX(-this.speed);
+                    this.directionX = "left";
+                    this.anims.play('crounchLeft');
                 }
-                //Normal
+                else if (this.keyD.isDown){
+                    this.setVelocityX(this.speed);
+                    this.directionX = "right";
+                    this.anims.play('crounchRight');
+                }
                 else {
-                    this.speed = 300;
-                    if (this.keyQ.isDown) {
-                        this.setVelocityX(-this.speed);
-                        this.anims.play('left', true);
-                        this.directionX = "left";
-                    }
-                    else if (this.keyD.isDown) {
-                        this.setVelocityX(this.speed);
-                        this.anims.play('right', true);
-                        this.directionX = "right";
-                    }
-                    else {
-                        this.setVelocityX(0);
-                        this.anims.play('turn');
-                    }
+                    this.anims.play('crounch');
                 }
+            }
+            else {
+                this.inCrounch = false;
+                this.speed = 300;
+            }
 
-                //Tire
-                if (Phaser.Input.Keyboard.JustDown(this.keyI)) {
-                    this.inAction = true;
-                    this.inShoot = true;
+            if (this.inAction == false && this.inCrounch == false) {
+                this.setSize(128, 256);
+                if (this.keyQ.isDown) {
+                    this.setVelocityX(-this.speed);
+                    this.anims.play('left', true);
+                    this.directionX = "left";
+                }
+                else if (this.keyD.isDown) {
+                    this.setVelocityX(this.speed);
+                    this.anims.play('right', true);
+                    this.directionX = "right";
+                }
+                else if (this.inAction == false){
                     this.setVelocityX(0);
-                    if (this.directionX == "right") {
-                        this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 32);
-                    }
-                    else {
-                        this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 32);
-                    }
-                    this.shoot.getPlayer(this, this.directionX);
-                    this.langue.add(this.shoot);
+                    this.anims.play('turn');
                 }
             }
 
+            //Tire
+            if (Phaser.Input.Keyboard.JustDown(this.keyI) && this.inAction == false) {
+                this.inAction = true;
+                this.inShoot = true;
+                this.setVelocityX(0);
+                if (this.directionX == "right" && this.inCrounch == false) {
+                    console.log("test")
+                    this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 64);
+                }
+                else if (this.directionX == "left" && this.inCrounch == false){
+                    this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 64);
+                }
+                else if (this.directionX == "right" && this.inCrounch == true){
+                    this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 16);
+                }
+                else if (this.directionX == "left" && this.inCrounch == true){
+                    this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 16);
+                }
+                this.shoot.getPlayer(this, this.directionX, this.inCrounch);
+                this.langue.add(this.shoot);
+            }
+
+
             //Saut
-            if (this.keySpace.isDown && this.body.blocked.down && this.inShoot == false) {
+            if (this.keySpace.isDown && this.body.blocked.down && this.inShoot == false && this.inCrounch == false) {
                 this.chargeJump += 1;
                 this.inJump = true;
                 if (this.chargeJump > 20) {
@@ -212,8 +223,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 this.chargeJump = 0;
                 this.inJump = false;
             }
-
         }
+
         //Nage
         else {
             //Setup
@@ -359,20 +370,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         //Switch Chapeau
-        if (Phaser.Input.Keyboard.JustDown(this.keyO)){
+        if (Phaser.Input.Keyboard.JustDown(this.keyO)) {
             if (this.currentHat != 3) {
                 this.currentHat += 1;
             }
             else {
                 this.currentHat = 0;
             }
-            if (this.unlock[0] == false && this.currentHat == 1){
+            if (this.unlock[0] == false && this.currentHat == 1) {
                 this.currentHat += 1;
             }
-            if (this.unlock[1] == false && this.currentHat == 2){
+            if (this.unlock[1] == false && this.currentHat == 2) {
                 this.currentHat += 1;
             }
-            if (this.unlock[2] == false && this.currentHat == 3){
+            if (this.unlock[2] == false && this.currentHat == 3) {
                 this.currentHat = 0;
             }
             eventsCenter.emit('switchHat', this.currentHat);
