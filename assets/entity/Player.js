@@ -15,6 +15,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.speed = 300;
         this.jumpSpeed = 660;
         this.dashSpeed = 900;
+        this.climbSpeed = 200;
         this.chargeJump = 0;
         this.cdDash = false;
         this.inCrounch = false;
@@ -22,6 +23,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.inAction = false;
         this.inShoot = false;
         this.inWater = false;
+        this.onPlant = false;
+        this.inMouth = "";
         this.directionX = "right";
         this.directionY = "";
         this.langue = new Phaser.GameObjects.Group;
@@ -106,6 +109,31 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 frames: [{ key: 'perso', frame: 9 }],
                 frameRate: 20
             });
+
+            this.anims.create({
+                key: 'standby_grab',
+                frames: [{ key: 'perso', frame: 10 }],
+                frameRate: 20
+            });
+
+            this.anims.create({
+                key: 'left_grab',
+                frames: [{ key: 'perso', frame: 11 }],
+                frameRate: 20
+            });
+
+            this.anims.create({
+                key: 'right_grab',
+                frames: [{ key: 'perso', frame: 12 }],
+                frameRate: 20
+            });
+
+            this.anims.create({
+                key: 'climb_grab',
+                frames: [{ key: 'perso', frame: 13 }],
+                frameRate: 20
+            });
+
         }
     }
 
@@ -118,112 +146,184 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         //Déplacement Terre
         if (this.inWater == false) {
             //Setup
-            this.setGravity(0, 0);
             this.setAngle(0);
-            //Crounch
-            if (this.keyS.isDown && this.inJump != true && this.inAction == false) {
-                this.setSize(128, 192);
-                this.setOffset(0, 64);
-                this.inCrounch = true;
-                this.speed = 150;
-                if (this.keyQ.isDown){
-                    this.setVelocityX(-this.speed);
-                    this.directionX = "left";
-                    this.anims.play('crounchLeft');
-                }
-                else if (this.keyD.isDown){
-                    this.setVelocityX(this.speed);
-                    this.directionX = "right";
-                    this.anims.play('crounchRight');
-                }
-                else {
-                    this.anims.play('crounch');
-                }
-            }
-            else {
-                this.inCrounch = false;
-                this.speed = 300;
-            }
-
-            if (this.inAction == false && this.inCrounch == false) {
-                this.setSize(128, 256);
+            //On Plant
+            if (this.onPlant && this.currentHat == 1) {
+                this.setGravity(0, -800);
+                this.onPlant = false;
                 if (this.keyQ.isDown) {
                     this.setVelocityX(-this.speed);
-                    this.anims.play('left', true);
+                    this.anims.play('left_grab', true);
                     this.directionX = "left";
                 }
                 else if (this.keyD.isDown) {
                     this.setVelocityX(this.speed);
-                    this.anims.play('right', true);
+                    this.anims.play('right_grab', true);
                     this.directionX = "right";
                 }
-                else if (this.inAction == false){
+                else if (this.inAction == false) {
                     this.setVelocityX(0);
-                    this.anims.play('turn');
+                    this.anims.play('standby_grab');
+                }
+
+                if (this.keyZ.isDown) {
+                    this.setVelocityY(-this.climbSpeed);
+                    this.anims.play('climb_grab');
+                }
+                else if (this.keyS.isDown) {
+                    this.setVelocityY(this.climbSpeed)
+                    this.anims.play('climb_grab');
+                }
+                else {
+                    this.setVelocityY(0);
                 }
             }
+            // Not On Plant
+            else {
+                this.setGravity(0, 0);
+                //Crounch
+                if (this.keyS.isDown && this.inJump != true && this.inAction == false) {
+                    this.setSize(128, 192);
+                    this.setOffset(0, 64);
+                    this.inCrounch = true;
+                    this.speed = 150;
+                    if (this.keyQ.isDown) {
+                        this.setVelocityX(-this.speed);
+                        this.directionX = "left";
+                        this.anims.play('crounchLeft');
+                    }
+                    else if (this.keyD.isDown) {
+                        this.setVelocityX(this.speed);
+                        this.directionX = "right";
+                        this.anims.play('crounchRight');
+                    }
+                    else {
+                        this.anims.play('crounch');
+                    }
+                }
+                else {
+                    this.inCrounch = false;
+                    this.speed = 300;
+                }
 
-            //Tire
-            if (Phaser.Input.Keyboard.JustDown(this.keyI) && this.inAction == false) {
-                this.inAction = true;
-                this.inShoot = true;
-                this.setVelocityX(0);
-                if (this.directionX == "right" && this.inCrounch == false) {
-                    console.log("test")
-                    this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 64);
+                if (this.inAction == false && this.inCrounch == false) {
+                    this.setSize(128, 256);
+                    if (this.keyQ.isDown) {
+                        this.setVelocityX(-this.speed);
+                        this.anims.play('left', true);
+                        this.directionX = "left";
+                    }
+                    else if (this.keyD.isDown) {
+                        this.setVelocityX(this.speed);
+                        this.anims.play('right', true);
+                        this.directionX = "right";
+                    }
+                    else if (this.inAction == false) {
+                        this.setVelocityX(0);
+                        this.anims.play('turn');
+                    }
                 }
-                else if (this.directionX == "left" && this.inCrounch == false){
-                    this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 64);
-                }
-                else if (this.directionX == "right" && this.inCrounch == true){
-                    this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 16);
-                }
-                else if (this.directionX == "left" && this.inCrounch == true){
-                    this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 16);
-                }
-                this.shoot.getPlayer(this, this.directionX, this.inCrounch);
-                this.langue.add(this.shoot);
-            }
 
-
-            //Saut
-            if (this.keySpace.isDown && this.body.blocked.down && this.inShoot == false && this.inCrounch == false) {
-                this.chargeJump += 1;
-                this.inJump = true;
-                if (this.chargeJump > 20) {
+                //Tire
+                if (Phaser.Input.Keyboard.JustDown(this.keyI) && this.inAction == false) {
                     this.inAction = true;
+                    this.inShoot = true;
                     this.setVelocityX(0);
-                    this.anims.play('chargeJump');
+                    if (this.inMouth == "") {
+                        if (this.directionX == "right" && this.inCrounch == false) {
+                            this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 64);
+                        }
+                        else if (this.directionX == "left" && this.inCrounch == false) {
+                            this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 64);
+                        }
+                        else if (this.directionX == "right" && this.inCrounch == true) {
+                            this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 16);
+                        }
+                        else if (this.directionX == "left" && this.inCrounch == true) {
+                            this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 16);
+                        }
+                        this.scene.physics.add.collider(this.shoot, this.scene.wall, this.shoot.returnBack, null, this.scene);
+                        this.scene.physics.add.collider(this.shoot, this.scene.berry, this.shoot.gotBerry, null, this.scene);
+                        this.shoot.getPlayer(this, this.directionX, this.inCrounch);
+                        this.langue.add(this.shoot);
+                    }
+                    else if (this.currentHat == 3){
+                        this.inMouth = "";
+                        this.scene.time.delayedCall(100, ()=>{this.inAction = false; this.inShoot = false}, [], this);
+                        if (this.directionX == "right" && this.inCrounch == false) {
+                            this.scene.playerProj.create(this.x + 80, this.y - 64, "fire").setVelocityX(1000).body.setAllowGravity(false);
+                        }
+                        else if (this.directionX == "left" && this.inCrounch == false) {
+                            this.scene.playerProj.create(this.x - 80, this.y - 64, "fire").setVelocityX(-1000).body.setAllowGravity(false);
+                        }
+                        else if (this.directionX == "right" && this.inCrounch == true) {
+                            this.scene.playerProj.create(this.x + 80, this.y - 16, "fire").setVelocityX(1000).body.setAllowGravity(false);
+                        }
+                        else if (this.directionX == "left" && this.inCrounch == true) {
+                            this.scene.playerProj.create(this.x - 80, this.y - 16, "fire").setVelocityX(-1000).body.setAllowGravity(false);
+                        }
+                        this.scene.playerProj.damage = 3;
+                    }
+                    else if (this.inMouth == "berry"){
+                        this.inMouth = "";
+                        this.scene.time.delayedCall(100, ()=>{this.inAction = false; this.inShoot = false}, [], this);
+                        if (this.directionX == "right" && this.inCrounch == false) {
+                            this.scene.playerProj.create(this.x + 80, this.y - 64, "berry").setVelocityX(1000).setGravity(0,-600);
+                        }
+                        else if (this.directionX == "left" && this.inCrounch == false) {
+                            this.scene.playerProj.create(this.x - 80, this.y - 64, "berry").setVelocityX(-1000).setGravity(0,-600);
+                        }
+                        else if (this.directionX == "right" && this.inCrounch == true) {
+                            this.scene.playerProj.create(this.x + 80, this.y - 16, "berry").setVelocityX(1000).setGravity(0,-600);
+                        }
+                        else if (this.directionX == "left" && this.inCrounch == true) {
+                            this.scene.playerProj.create(this.x - 80, this.y - 16, "berry").setVelocityX(-1000).setGravity(0,-600);
+                        }
+                        this.scene.playerProj.damage = 2;
+                    }
                 }
-            }
-            //Jump C0
-            if (this.keySpace.isUp && this.inJump && this.chargeJump <= 20 && this.body.blocked.down) {
-                console.log("Jump C0");
-                this.inJump = false;
-                this.chargeJump = 0;
-                this.setVelocityY(-this.jumpSpeed);
-            }
-            //Jump c1
-            else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 20 && this.chargeJump <= 40)) {
-                console.log("Jump C1");
-                this.inJump = false;
-                this.chargeJump = 0;
-                this.inAction = false;
-                this.setVelocityY(-this.jumpSpeed * 1.3);
-            }
-            //JumpC2
-            else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 40)) {
-                console.log("Jump C2");
-                this.inJump = false;
-                this.chargeJump = 0;
-                this.inAction = false;
-                this.setVelocityY(-this.jumpSpeed * 1.5);
-            }
-            if (!this.body.blocked.down) {
-                this.chargeJump = 0;
-                this.inJump = false;
+
+
+                //Saut
+                if (this.keySpace.isDown && this.body.blocked.down && this.inShoot == false && this.inCrounch == false) {
+                    this.chargeJump += 1;
+                    this.inJump = true;
+                    if (this.chargeJump > 20) {
+                        this.inAction = true;
+                        this.setVelocityX(0);
+                        this.anims.play('chargeJump');
+                    }
+                }
+                //Jump C0
+                if (this.keySpace.isUp && this.inJump && this.chargeJump <= 20 && this.body.blocked.down) {
+                    console.log("Jump C0");
+                    this.inJump = false;
+                    this.chargeJump = 0;
+                    this.setVelocityY(-this.jumpSpeed);
+                }
+                //Jump c1
+                else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 20 && this.chargeJump <= 40)) {
+                    console.log("Jump C1");
+                    this.inJump = false;
+                    this.chargeJump = 0;
+                    this.inAction = false;
+                    this.setVelocityY(-this.jumpSpeed * 1.3);
+                }
+                //JumpC2
+                else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 40)) {
+                    console.log("Jump C2");
+                    this.inJump = false;
+                    this.chargeJump = 0;
+                    this.inAction = false;
+                    this.setVelocityY(-this.jumpSpeed * 1.5);
+                }
+                if (!this.body.blocked.down) {
+                    this.chargeJump = 0;
+                    this.inJump = false;
+                }
             }
         }
+
 
         //Nage
         else {
@@ -392,6 +492,24 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     enterWater(player) {
         player.inWater = true;
+    }
+
+    onPlantGrab(player) {
+        player.onPlant = true;
+    }
+
+    getBerry(player, berry) {
+        berry.destroy();
+        player.inMouth = "berry";
+    }
+
+    canGetBerry(player, berry) {
+        if (berry.getGrab) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

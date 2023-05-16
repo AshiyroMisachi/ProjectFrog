@@ -78,4 +78,23 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
         this.targetDirection = direction;
         this.targetInCrounch = position;
     }
+
+    returnBack(shoot, wall){
+        shoot.movement = false;
+    }
+
+    gotBerry(shoot, berry){
+        let berryX = berry.x;
+        let berryY = berry.y;
+        this.time.delayedCall(5000, ()=>{ this.berry.create(berryX, berryY, "berry").setDepth(-1) }, [], this);
+        shoot.movement = false;
+        berry.getGrab = true;
+        if (shoot.targetInCrounch == false){
+            this.physics.moveTo(berry, this.player.x, this.player.y - 64, 600);
+        }
+        else {
+            this.physics.moveTo(berry, this.player.x, this.player.y - 16, 600);
+        }
+        
+    }
 }
