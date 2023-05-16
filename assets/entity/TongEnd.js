@@ -15,6 +15,8 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
         this.target = null;
         this.movement = true;
         this.disapear = false;
+        this.targetDirection = null;
+        this.targetInCrounch = null;
 
         //Parametre
         this.body.setAllowGravity(false);
@@ -42,7 +44,12 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
                 this.target.inAction = false;
                 this.target.inShoot = false;
             }
-            this.y = this.target.y - 32;
+            if (this.targetInCrounch == false){
+                this.y = this.target.y - 64;
+            }
+            else {
+                this.y = this.target.y - 16;
+            }
             if (this.movement && this.disapear == false) {
                 if (this.targetDirection == "right") {
                     this.setVelocityX(this.speed);
@@ -66,8 +73,9 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
 
     }
 
-    getPlayer(player, direction) {
+    getPlayer(player, direction, position) {
         this.target = player;
         this.targetDirection = direction;
+        this.targetInCrounch = position;
     }
 }

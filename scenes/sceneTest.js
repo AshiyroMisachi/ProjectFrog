@@ -73,13 +73,13 @@ export class SceneTest extends Phaser.Scene {
 
     collectHat(player, hat){
         if (hat.type == "grab"){
-            player.unlockGrab = true;
+            player.unlock[0] = true;
         }
         else if (hat.type == "grow"){
-            player.unlockGrow = true;
+            player.unlock[1] = true;
         }
         else if (hat.type == "fire"){
-            player.unlockFire = true;
+            player.unlock[2] = true;
         }
         hat.destroy();
     }
