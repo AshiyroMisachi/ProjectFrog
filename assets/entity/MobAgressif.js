@@ -11,11 +11,12 @@ export class MobAgressif extends Phaser.Physics.Arcade.Sprite {
 
     init() {
         //Variable
+        this.health = 3;
         this.target = null;
         this.spawnX = this.x;
         this.spawnY = this.y;
         this.inAgro = false;
-        this.inZone = true;
+        this.inZone = false;
         this.goBack = false;
 
         //Parametre
@@ -34,10 +35,10 @@ export class MobAgressif extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         //In Agro
-        if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 500 && this.goBack == false) {
+        if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 600 && this.goBack == false) {
             this.inAgro = true;
             this.anims.play(this.animsAgro);
-            this.scene.physics.moveToObject(this, this.target, 300);
+            this.scene.physics.moveToObject(this, this.target, 200);
         }
         else if (this.inAgro) {
             this.inAgro = false;
@@ -55,7 +56,7 @@ export class MobAgressif extends Phaser.Physics.Arcade.Sprite {
         //Go back
         if ((this.inZone == false || this.inAgro == false) && this.goBack == false){
             this.goBack = true;
-            this.scene.time.delayedCall(2000, ()=>{this.goBack = false}, [], this);
+            this.scene.time.delayedCall(1500, ()=>{this.goBack = false}, [], this);
             this.scene.physics.moveTo(this, this.spawnX, this.spawnY, 500, 2000);
         }
     }

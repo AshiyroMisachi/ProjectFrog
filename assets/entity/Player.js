@@ -12,21 +12,28 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     init() {
         //Variable perso
+        this.health = 5;
+        this.respawnX = this.x;
+        this.respawnY = this.y;
+        
         this.speed = 300;
         this.jumpSpeed = 660;
         this.dashSpeed = 900;
         this.climbSpeed = 200;
+
         this.chargeJump = 0;
         this.cdDash = false;
+
         this.inCrounch = false;
         this.inJump = false;
         this.inAction = false;
         this.inShoot = false;
         this.inWater = false;
         this.onPlant = false;
-        this.inMouth = "";
         this.directionX = "right";
-        this.directionY = "";
+        this.directionY = ""; 
+
+        this.inMouth = "";
         this.langue = new Phaser.GameObjects.Group;
         this.shoot = null;
 
@@ -48,93 +55,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.keyO = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
         this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        //Anims
-        if (true) {
-            this.anims.create({
-                key: 'turn',
-                frames: [{ key: 'perso', frame: 0 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'left',
-                frames: [{ key: 'perso', frame: 1 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'right',
-                frames: [{ key: 'perso', frame: 2 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'chargeJump',
-                frames: [{ key: 'perso', frame: 3 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'crounch',
-                frames: [{ key: 'perso', frame: 4 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'crounchLeft',
-                frames: [{ key: 'perso', frame: 5 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'crounchRight',
-                frames: [{ key: 'perso', frame: 6 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'shootingStand',
-                frames: [{ key: 'perso', frame: 7 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'shootingCrounch',
-                frames: [{ key: 'perso', frame: 8 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'swim',
-                frames: [{ key: 'perso', frame: 9 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'standby_grab',
-                frames: [{ key: 'perso', frame: 10 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'left_grab',
-                frames: [{ key: 'perso', frame: 11 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'right_grab',
-                frames: [{ key: 'perso', frame: 12 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'climb_grab',
-                frames: [{ key: 'perso', frame: 13 }],
-                frameRate: 20
-            });
-
-        }
     }
 
     initEvents() {
@@ -488,8 +408,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             }
             eventsCenter.emit('switchHat', this.currentHat);
         }
+
+        //Update Health
+        eventsCenter.emit('updateHealth', this.health);
     }
 
+    //Verifaction Etat Déplacement
     enterWater(player) {
         player.inWater = true;
     }
@@ -498,6 +422,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         player.onPlant = true;
     }
 
+
+    //Récupération Projectile
     getBerry(player, berry) {
         berry.destroy();
         player.inMouth = "berry";
@@ -510,6 +436,37 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         else {
             return false;
         }
+    }
+
+    //Gestion prise de dégâts
+    getDamaged(player, mob){
+        player.health -= 1;
+        player.getHit = true;
+        mob.doHit = true;
+        if (this.health == 0){
+            //this.scene.scene.start("gameOver");
+        }
+        if (mob.body.touching.right){
+            player.body.setVelocity(-200, -60);
+            mob.body.setVelocity(200, 0);
+        }
+        else if (mob.body.touching.left){
+            player.body.setVelocity(200, -60);
+            mob.body.setVelocity(-200, 0);
+        }
+        else if (mob.body.touching.up){
+            player.body.setVelocity(-60, -200);
+            mob.body.setVelocity(60, -200);
+        }
+        else if (player.body.touching.down){
+            player.body.setVelocity(60, 200);
+            mob.body.setVelocity(-60, 200);
+        }
+    }
+
+    respawn(){
+        this.x = this.respawnX;
+        this.y = this.respawnY;
     }
 
 }

@@ -105,6 +105,8 @@ export class SceneTest extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.plantGrab, this.player.onPlantGrab, null, this);
         this.physics.add.overlap(this.player, this.berry, this.player.getBerry, this.player.canGetBerry, this);
         this.physics.add.overlap(this.player, this.hat, this.collectHat, null, this);
+
+        this.physics.add.collider(this.player, this.mobAgressif, this.player.getDamaged, null, this);
     }
 
     update(){

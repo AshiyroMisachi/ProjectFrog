@@ -17,29 +17,15 @@ export class UiScene extends Phaser.Scene
 
 	create()
 	{
-		this.cadre = this.physics.add.sprite(100, 100, "cadreHat").setScale(4);
-		this.anims.create({
-			key: 'empty',
-			frames: [{ key: 'cadreHat', frame: 0 }],
-			frameRate: 20
-		});
-		this.anims.create({
-			key: 'grab',
-			frames: [{ key: 'cadreHat', frame: 1 }],
-			frameRate: 20
-		});
-		this.anims.create({
-			key: 'grow',
-			frames: [{ key: 'cadreHat', frame: 2 }],
-			frameRate: 20
-		});
-		this.anims.create({
-			key: 'fire',
-			frames: [{ key: 'cadreHat', frame: 3 }],
-			frameRate: 20
-		});
+		//Gestion Cadre Hat
+		this.cadre = this.physics.add.sprite(110, 100, "cadreHat").setScale(4);
 		this.cadre.anims.play('empty');
         eventsCenter.on('switchHat', this.switchHat, this);
+
+		//Gestion Barre de Vie
+		this.healthBar = this.physics.add.sprite(480, 60, "healthBar").setScale(1.5);
+		this.healthBar.anims.play("5");
+		eventsCenter.on('updateHealth', this.updateHealth, this);
 	}
 
 	switchHat(currentHat) {
@@ -54,6 +40,27 @@ export class UiScene extends Phaser.Scene
 		}
 		else if (currentHat == 3){
 			this.cadre.anims.play('fire');
+		}
+	}
+
+	updateHealth(currentHealth){
+		if (currentHealth == 5){
+			this.healthBar.anims.play("5");
+		}
+		else if (currentHealth == 4){
+			this.healthBar.anims.play("4");
+		}
+		else if (currentHealth == 3){
+			this.healthBar.anims.play("3");
+		}
+		else if (currentHealth == 2){
+			this.healthBar.anims.play("2");
+		}
+		else if (currentHealth == 1){
+			this.healthBar.anims.play("1");
+		}
+		else if (currentHealth == 0){
+			this.healthBar.anims.play("0");
 		}
 	}
 }

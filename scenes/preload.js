@@ -2,8 +2,8 @@ export class Preload extends Phaser.Scene {
     constructor() {
         super("preload");
     }
-    
-    preload(){
+
+    preload() {
         //Map Tiled
         this.load.image("tileset_Test", "../maps/tileset_test.png");
         this.load.tilemapTiledJSON("sceneTest", "../assets/json/sceneTest.json");
@@ -14,16 +14,21 @@ export class Preload extends Phaser.Scene {
         this.load.spritesheet('tongEnd', '../assets/spritesheet/tong.png',
             { frameWidth: 32, frameHeight: 32 });
 
-        
+        //Hat
         this.load.spritesheet('hatGrab', '../assets/spritesheet/hatGrab.png',
             { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('hatGrow', '../assets/spritesheet/hatGrow.png',
             { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('hatFire', '../assets/spritesheet/hatFire.png',
             { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('cadreHat', '../assets/spritesheet/cadrehat.png',
-            { frameWidth: 49, frameHeight:48 });
 
+        //UI
+        this.load.spritesheet('cadreHat', '../assets/spritesheet/cadrehat.png',
+            { frameWidth: 49, frameHeight: 48 });
+        this.load.spritesheet('healthBar', '../assets/spritesheet/healthBarSS.png',
+            { frameWidth: 320, frameHeight: 64 });
+
+        //Mob
         this.load.spritesheet('mobGuepe', '../assets/spritesheet/guepeSS.png',
             { frameWidth: 32, frameHeight: 64 });
 
@@ -42,8 +47,8 @@ export class Preload extends Phaser.Scene {
         this.load.image('waterCheckIMG', '../assets/waterCheck.png');
     }
 
-    create(){
-        //Animation Joueur
+    create() {
+        //Animation Joueur//
         {
             this.anims.create({
                 key: 'turn',
@@ -131,8 +136,8 @@ export class Preload extends Phaser.Scene {
 
         }
 
-        //Animation Mob
-            //Guepe
+        //Animation Mob//
+        //Guepe
         {
             this.anims.create({
                 key: 'guepe_passif',
@@ -145,10 +150,67 @@ export class Preload extends Phaser.Scene {
                 frameRate: 20
             });
         }
-        
+
+        //Animation UI//
+        //Cadre Hat
+        {
+            this.anims.create({
+                key: 'empty',
+                frames: [{ key: 'cadreHat', frame: 0 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: 'grab',
+                frames: [{ key: 'cadreHat', frame: 1 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: 'grow',
+                frames: [{ key: 'cadreHat', frame: 2 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: 'fire',
+                frames: [{ key: 'cadreHat', frame: 3 }],
+                frameRate: 20
+            });
+        }
+        //Barre de vie
+        {
+            this.anims.create({
+                key: '0',
+                frames: [{ key: 'healthBar', frame: 0 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: '1',
+                frames: [{ key: 'healthBar', frame: 1 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: '2',
+                frames: [{ key: 'healthBar', frame: 2 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: '3',
+                frames: [{ key: 'healthBar', frame: 3 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: '4',
+                frames: [{ key: 'healthBar', frame: 4 }],
+                frameRate: 20
+            });
+            this.anims.create({
+                key: '5',
+                frames: [{ key: 'healthBar', frame: 5 }],
+                frameRate: 20
+            });
+        }
     }
 
-    update(){
+    update() {
         this.scene.start("mainScreen");
     }
 }
