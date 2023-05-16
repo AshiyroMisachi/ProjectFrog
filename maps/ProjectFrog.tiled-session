@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "sceneTest.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
@@ -43,8 +43,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 782,
-                "y": 1534
+                "x": 780,
+                "y": 1532
             }
         },
         "tileset_test.tsx": {
@@ -62,16 +62,13 @@
     "map.tileWidth": 64,
     "map.width": 50,
     "openFiles": [
-        "sceneTest.tmx",
-        "tileset_test.tsx",
-        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx"
     ],
     "project": "ProjectFrog.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx",
         "tileset_test.tsx",
-        "sceneTest.tmx"
+        "sceneTest.tmx",
+        "C:/Users/riall/Desktop/PlatformerJV1-main/maps/level_01.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
