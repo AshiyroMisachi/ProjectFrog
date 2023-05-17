@@ -17,6 +17,7 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
         this.disapear = false;
         this.targetDirection = null;
         this.targetInCrounch = null;
+        this.damage = 1;
 
         //Parametre
         this.body.setAllowGravity(false);
@@ -44,7 +45,7 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
                 this.target.inAction = false;
                 this.target.inShoot = false;
             }
-            if (this.targetInCrounch == false){
+            if (this.targetInCrounch == false) {
                 this.y = this.target.y - 64;
             }
             else {
@@ -79,22 +80,62 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
         this.targetInCrounch = position;
     }
 
-    returnBack(shoot, wall){
+    returnBack(shoot, wall) {
         shoot.movement = false;
     }
 
-    gotBerry(shoot, berry){
+    //Get item
+    gotBerry(shoot, berry) {
         let berryX = berry.x;
         let berryY = berry.y;
-        this.time.delayedCall(5000, ()=>{ this.berry.create(berryX, berryY, "berry").setDepth(-1) }, [], this);
+        this.time.delayedCall(5000, () => { this.berry.create(berryX, berryY, "berry").setDepth(-1) }, [], this);
         shoot.movement = false;
         berry.getGrab = true;
-        if (shoot.targetInCrounch == false){
+        if (shoot.targetInCrounch == false) {
             this.physics.moveTo(berry, this.player.x, this.player.y - 64, 600);
         }
         else {
             this.physics.moveTo(berry, this.player.x, this.player.y - 16, 600);
         }
-        
+    }
+
+    gotMoustique(shoot, moustique) {
+        shoot.movement = false;
+        moustique.getGrab = true;
+        if (shoot.targetInCrounch == false) {
+            this.physics.moveTo(moustique, this.player.x, this.player.y - 64, 600);
+        }
+        else {
+            this.physics.moveTo(moustique, this.player.x, this.player.y - 16, 600);
+        }
+    }
+
+    //Prise de dégâts
+    doDamage(tong, mob) {
+        console.log("Test")
+        tong.movement = false;
+        mob.health -= 1;
+        mob.getHit = true;
+        mob.setTint(0xff0000)
+        if (mob.health <= 0) {
+            mob.destroy();
+            this.events.off(Phaser.Scenes.Events.UPDATE, mob.update, mob);
+        }
+
+        if (mob.typeE == "mobAgro") {
+            if (tong.body.touching.right) {
+                mob.body.setVelocity(200, -60);
+            }
+            else if (tong.body.touching.left) {
+                mob.body.setVelocity(-200, -60);
+            }
+            else if (tong.body.touching.up) {
+                mob.body.setVelocity(-60, -200);
+            }
+            else if (tong.body.touching.down) {
+                mob.body.setVelocity(60, 200);
+            }
+        }
+        this.time.delayedCall(200, (mob) => { mob.getHit = false; mob.setTint() }, [mob], this);
     }
 }

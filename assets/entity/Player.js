@@ -1,5 +1,6 @@
 import { eventsCenter } from "../../scenes/script.js";
 import { TongEnd } from "./TongEnd.js";
+import { PlayerProj } from "./PlayerProj.js";
 export class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, "perso");
@@ -15,7 +16,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.health = 5;
         this.respawnX = this.x;
         this.respawnY = this.y;
-        
+
+        this.getHit = false
+        this.clignotement = 3;
+
         this.speed = 300;
         this.jumpSpeed = 660;
         this.dashSpeed = 900;
@@ -31,10 +35,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.inWater = false;
         this.onPlant = false;
         this.directionX = "right";
-        this.directionY = ""; 
+        this.directionY = "";
 
         this.inMouth = "";
-        this.langue = new Phaser.GameObjects.Group;
         this.shoot = null;
 
         //0: Grab 1:Grow 2:Fire
@@ -43,6 +46,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         //Parametre
         this.setOrigin(0.5, 0.5)
+        this.setCollideWorldBounds(true);
 
         //Controle Key
         this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -68,7 +72,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             //Setup
             this.setAngle(0);
             //On Plant
-            if (this.onPlant && this.currentHat == 1) {
+            if (this.onPlant && this.currentHat == 1 && this.inAction == false) {
                 this.setGravity(0, -800);
                 this.onPlant = false;
                 if (this.keyQ.isDown) {
@@ -102,7 +106,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             else {
                 this.setGravity(0, 0);
                 //Crounch
-                if (this.keyS.isDown && this.inJump != true && this.inAction == false) {
+                if (this.keyS.isDown && this.inJump != true) {
                     this.setSize(128, 192);
                     this.setOffset(0, 64);
                     this.inCrounch = true;
@@ -118,6 +122,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                         this.anims.play('crounchRight');
                     }
                     else {
+                        this.setVelocityX(0);
                         this.anims.play('crounch');
                     }
                 }
@@ -126,7 +131,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                     this.speed = 300;
                 }
 
-                if (this.inAction == false && this.inCrounch == false) {
+                if (this.inCrounch == false) {
                     this.setSize(128, 256);
                     if (this.keyQ.isDown) {
                         this.setVelocityX(-this.speed);
@@ -138,7 +143,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                         this.anims.play('right', true);
                         this.directionX = "right";
                     }
-                    else if (this.inAction == false) {
+                    else {
                         this.setVelocityX(0);
                         this.anims.play('turn');
                     }
@@ -164,42 +169,45 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                         }
                         this.scene.physics.add.collider(this.shoot, this.scene.wall, this.shoot.returnBack, null, this.scene);
                         this.scene.physics.add.collider(this.shoot, this.scene.berry, this.shoot.gotBerry, null, this.scene);
+                        this.scene.physics.add.collider(this.shoot, this.scene.moustique, this.shoot.gotMoustique, null, this.scene);
+                        this.scene.physics.add.overlap(this.shoot, this.scene.mobAgressif, this.shoot.doDamage, null, this.scene);
                         this.shoot.getPlayer(this, this.directionX, this.inCrounch);
-                        this.langue.add(this.shoot);
                     }
-                    else if (this.currentHat == 3){
-                        this.inMouth = "";
-                        this.scene.time.delayedCall(100, ()=>{this.inAction = false; this.inShoot = false}, [], this);
+                    else if (this.currentHat == 3) {
                         if (this.directionX == "right" && this.inCrounch == false) {
-                            this.scene.playerProj.create(this.x + 80, this.y - 64, "fire").setVelocityX(1000).body.setAllowGravity(false);
+                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 64, "fire", 3).setVelocityX(1000);
                         }
                         else if (this.directionX == "left" && this.inCrounch == false) {
-                            this.scene.playerProj.create(this.x - 80, this.y - 64, "fire").setVelocityX(-1000).body.setAllowGravity(false);
+                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, "fire", 3).setVelocityX(-1000);
                         }
                         else if (this.directionX == "right" && this.inCrounch == true) {
-                            this.scene.playerProj.create(this.x + 80, this.y - 16, "fire").setVelocityX(1000).body.setAllowGravity(false);
+                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, "fire", 3).setVelocityX(1000);
                         }
                         else if (this.directionX == "left" && this.inCrounch == true) {
-                            this.scene.playerProj.create(this.x - 80, this.y - 16, "fire").setVelocityX(-1000).body.setAllowGravity(false);
+                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, "fire", 3).setVelocityX(-1000);
                         }
-                        this.scene.playerProj.damage = 3;
+                        this.scene.physics.add.collider(this.proj, this.scene.breakFire, this.proj.breakFire, null, this.scene);
                     }
-                    else if (this.inMouth == "berry"){
-                        this.inMouth = "";
-                        this.scene.time.delayedCall(100, ()=>{this.inAction = false; this.inShoot = false}, [], this);
+                    else if (this.inMouth == "berry") {
                         if (this.directionX == "right" && this.inCrounch == false) {
-                            this.scene.playerProj.create(this.x + 80, this.y - 64, "berry").setVelocityX(1000).setGravity(0,-600);
+                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 64, "berryShoot", 2).setVelocityX(1000);
                         }
                         else if (this.directionX == "left" && this.inCrounch == false) {
-                            this.scene.playerProj.create(this.x - 80, this.y - 64, "berry").setVelocityX(-1000).setGravity(0,-600);
+                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, "berryShoot", 2).setVelocityX(-1000);
                         }
                         else if (this.directionX == "right" && this.inCrounch == true) {
-                            this.scene.playerProj.create(this.x + 80, this.y - 16, "berry").setVelocityX(1000).setGravity(0,-600);
+                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, "berryShoot", 2).setVelocityX(1000);
                         }
                         else if (this.directionX == "left" && this.inCrounch == true) {
-                            this.scene.playerProj.create(this.x - 80, this.y - 16, "berry").setVelocityX(-1000).setGravity(0,-600);
+                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, "berryShoot", 2).setVelocityX(-1000);
                         }
-                        this.scene.playerProj.damage = 2;
+                    }
+
+                    if (this.inMouth != "") {
+                        this.scene.physics.add.collider(this.proj, this.scene.wall, this.proj.beDestroy, null, this.scene);
+                        this.scene.physics.add.overlap(this.proj, this.scene.mobAgressif, this.proj.doDamage, null, this.scene);
+                        this.scene.time.delayedCall(100, () => { this.inAction = false; this.inShoot = false }, [], this);
+                        this.inMouth = "";
                     }
                 }
 
@@ -438,35 +446,87 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    //Gestion prise de dégâts
-    getDamaged(player, mob){
-        player.health -= 1;
-        player.getHit = true;
-        mob.doHit = true;
-        if (this.health == 0){
-            //this.scene.scene.start("gameOver");
-        }
-        if (mob.body.touching.right){
-            player.body.setVelocity(-200, -60);
-            mob.body.setVelocity(200, 0);
-        }
-        else if (mob.body.touching.left){
-            player.body.setVelocity(200, -60);
-            mob.body.setVelocity(-200, 0);
-        }
-        else if (mob.body.touching.up){
-            player.body.setVelocity(-60, -200);
-            mob.body.setVelocity(60, -200);
-        }
-        else if (player.body.touching.down){
-            player.body.setVelocity(60, 200);
-            mob.body.setVelocity(-60, 200);
+    eatMoustique(player, moustique) {
+        moustique.destroy();
+        this.events.off(Phaser.Scenes.Events.UPDATE, moustique.update, moustique);
+        player.health += 1
+        if (player.health > 5) {
+            player.health = 5;
         }
     }
 
-    respawn(){
+    canEatMoustique(player, moustique) {
+        if (moustique.getGrab) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    //Gestion prise de dégâts
+    getDamagedByAgro(player, mob) {
+        player.health -= 1;
+        player.getHit = true;
+        player.invisible(player)
+        player.inAction = true;
+        mob.doHit = true;
+        if (player.health == 0) {
+            player.respawn();
+        }
+        if (mob.typeE == "mobAgro") {
+            if (mob.body.touching.right) {
+                player.body.setVelocity(200, -60);
+                mob.body.setVelocity(-200, -60);
+                console.log("Right")
+            }
+            else if (mob.body.touching.left) {
+                player.body.setVelocity(-200, -60);
+                mob.body.setVelocity(200, -60);
+            }
+            else if (mob.body.touching.up) {
+                player.body.setVelocity(-60, -200);
+                mob.body.setVelocity(60, -200);
+            }
+            else if (mob.body.touching.down) {
+                player.body.setVelocity(60, 200);
+                mob.body.setVelocity(-60, 200);
+            }
+        }
+        this.time.delayedCall(1000, () => { mob.doHit = false }, [mob], this);
+        this.time.delayedCall(300, () => { player.inAction = false }, [player], this);
+    }
+
+    canBeHit(player, mob) {
+        if (player.getHit == true) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    //I Frame
+    visible(player) {
+        player.setTint()
+        this.clignotement -= 1;
+        if (this.clignotement == 0) {
+            this.clignotement = 3;
+            this.getHit = false;
+        }
+        else {
+            this.scene.time.delayedCall(100, (player) => { player.invisible(player) }, [player], this);
+        }
+    }
+
+    invisible(player) {
+        player.setTint(0xff0000)
+        this.scene.time.delayedCall(100, (player) => { player.visible(player) }, [player], this);
+    }
+
+    respawn() {
         this.x = this.respawnX;
         this.y = this.respawnY;
+        this.health = 5;
     }
 
 }

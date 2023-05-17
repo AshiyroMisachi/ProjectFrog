@@ -32,12 +32,22 @@ export class Preload extends Phaser.Scene {
         this.load.spritesheet('mobGuepe', '../assets/spritesheet/guepeSS.png',
             { frameWidth: 32, frameHeight: 64 });
 
+        this.load.spritesheet('moustique', '../assets/spritesheet/moustique.png',
+            { frameWidth: 32, frameHeight: 32 });
+
+        this.load.spritesheet('mobSpider', '../assets/spritesheet/spiderSS.png',
+            { frameWidth: 64, frameHeight: 64 });
+
         //Texture Obstacle
         this.load.image("plantGrab", "../assets/planteGrab.png");
+        this.load.image("breakFire", "../assets/breakFire.png");
         this.load.image("berry", "../assets/berry.png");
 
         //Texture Proj
-        this.load.image("fire", "../assets/fire.png");
+        this.load.spritesheet("fire", "../assets/fire.png",
+            { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet("berryShoot", "../assets/berry.png",
+            { frameWidth: 32, frameHeight: 32 });
 
         //Image
         this.load.image('logoMainScreen', "../assets/logoMainScreen.png");
@@ -136,9 +146,30 @@ export class Preload extends Phaser.Scene {
 
         }
 
+        //Animation Proj
+        //Tong
+        this.anims.create({
+            key: 'tongProj',
+            frames: [{ key: 'tongEnd', frame: 0 }],
+            frameRate: 20
+        });
+        //Berry
+        this.anims.create({
+            key: 'berryProj',
+            frames: [{ key: 'berryShoot', frame: 0 }],
+            frameRate: 20
+        });
+
+        //Fire
+        this.anims.create({
+            key: 'fireProj',
+            frames: [{ key: 'fire', frame: 0 }],
+            frameRate: 20
+        });
+
         //Animation Mob//
-        //Guepe
         {
+            //Guepe
             this.anims.create({
                 key: 'guepe_passif',
                 frames: [{ key: 'mobGuepe', frame: 0 }],
@@ -149,6 +180,21 @@ export class Preload extends Phaser.Scene {
                 frames: [{ key: 'mobGuepe', frame: 1 }],
                 frameRate: 20
             });
+
+            //Spider
+            this.anims.create({
+                key: 'spider_base',
+                frames: [{ key: 'mobSpider', frame: 0 }],
+                frameRate: 20
+            });
+
+            //Moustique
+            this.anims.create({
+                key: 'moustique_mouv',
+                frames: [{ key: 'moustique', frame: 0 }],
+                frameRate: 20
+            });
+
         }
 
         //Animation UI//
