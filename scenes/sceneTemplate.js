@@ -147,6 +147,9 @@ export class SceneTemplate extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.mobAgressif, this.playerGetDamagedByEnnemy, this.player.canBeHit, this);
         this.physics.add.overlap(this.player, this.mob_proj, this.playerGetDamagedByProj, this.player.canBeHit, this);
 
+        //PLAYER PROJ
+        this.physics.add.collider(this.playerProj, this.wall, (proj)=>{proj.getDestroy()}, null, this);
+        this.physics.add.collider(this.playerProj, this.plateform, (proj)=>{proj.getDestroy()}, null, this);
 
         //MOB
         //Bordure

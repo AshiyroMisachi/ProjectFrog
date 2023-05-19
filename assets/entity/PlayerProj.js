@@ -30,7 +30,7 @@ export class PlayerProj extends Entity {
     update(){}
 
     breakFire(proj, obs){
-        proj.destroy()
+        proj.getDestroy()
         obs.destroy()
     }
 
