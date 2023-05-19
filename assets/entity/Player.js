@@ -1,7 +1,8 @@
 import { eventsCenter } from "../../scenes/script.js";
 import { TongEnd } from "./TongEnd.js";
 import { PlayerProj } from "./PlayerProj.js";
-export class Player extends Phaser.Physics.Arcade.Sprite {
+import { Entity } from "./Entity.js";
+export class Player extends Entity {
     constructor(scene, x, y) {
         super(scene, x, y, "perso");
         scene.add.existing(this);
@@ -106,46 +107,48 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             else {
                 this.setGravity(0, 0);
                 //Crounch
-                if (this.keyS.isDown && this.inJump != true) {
-                    this.setSize(128, 192);
-                    this.setOffset(0, 64);
-                    this.inCrounch = true;
-                    this.speed = 150;
-                    if (this.keyQ.isDown) {
-                        this.setVelocityX(-this.speed);
-                        this.directionX = "left";
-                        this.anims.play('crounchLeft');
-                    }
-                    else if (this.keyD.isDown) {
-                        this.setVelocityX(this.speed);
-                        this.directionX = "right";
-                        this.anims.play('crounchRight');
+                if (this.inAction == false) {
+                    if (this.keyS.isDown && this.inJump != true) {
+                        this.setSize(128, 192);
+                        this.setOffset(0, 64);
+                        this.inCrounch = true;
+                        this.speed = 150;
+                        if (this.keyQ.isDown) {
+                            this.setVelocityX(-this.speed);
+                            this.directionX = "left";
+                            this.anims.play('crounchLeft');
+                        }
+                        else if (this.keyD.isDown) {
+                            this.setVelocityX(this.speed);
+                            this.directionX = "right";
+                            this.anims.play('crounchRight');
+                        }
+                        else {
+                            this.setVelocityX(0);
+                            this.anims.play('crounch');
+                        }
                     }
                     else {
-                        this.setVelocityX(0);
-                        this.anims.play('crounch');
+                        this.inCrounch = false;
+                        this.speed = 300;
                     }
-                }
-                else {
-                    this.inCrounch = false;
-                    this.speed = 300;
-                }
 
-                if (this.inCrounch == false) {
-                    this.setSize(128, 256);
-                    if (this.keyQ.isDown) {
-                        this.setVelocityX(-this.speed);
-                        this.anims.play('left', true);
-                        this.directionX = "left";
-                    }
-                    else if (this.keyD.isDown) {
-                        this.setVelocityX(this.speed);
-                        this.anims.play('right', true);
-                        this.directionX = "right";
-                    }
-                    else {
-                        this.setVelocityX(0);
-                        this.anims.play('turn');
+                    if (this.inCrounch == false) {
+                        this.setSize(128, 256);
+                        if (this.keyQ.isDown) {
+                            this.setVelocityX(-this.speed);
+                            this.anims.play('left', true);
+                            this.directionX = "left";
+                        }
+                        else if (this.keyD.isDown) {
+                            this.setVelocityX(this.speed);
+                            this.anims.play('right', true);
+                            this.directionX = "right";
+                        }
+                        else {
+                            this.setVelocityX(0);
+                            this.anims.play('turn');
+                        }
                     }
                 }
 
@@ -173,45 +176,47 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                         this.scene.physics.add.overlap(this.shoot, this.scene.mobAgressif, this.shoot.doDamage, null, this.scene);
                         this.shoot.getPlayer(this, this.directionX, this.inCrounch);
                     }
-                    else if (this.currentHat == 3) {
+                    else {
+                        let skinProj;
+                        let damageProj;
+                        let gravityProj;
+                        if (this.currentHat == 3) {
+                            skinProj = "fire";
+                            damageProj = 3;
+                            gravityProj = 800;
+                        }
+                        else if (this.inMouth == "berry") {
+                            skinProj = "berryShoot";
+                            damageProj = 2;
+                            gravityProj = 600;
+                        }
                         if (this.directionX == "right" && this.inCrounch == false) {
-                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 64, "fire", 3).setVelocityX(1000);
+                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 64, skinProj, damageProj);
                         }
                         else if (this.directionX == "left" && this.inCrounch == false) {
-                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, "fire", 3).setVelocityX(-1000);
+                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, skinProj, damageProj);
                         }
                         else if (this.directionX == "right" && this.inCrounch == true) {
-                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, "fire", 3).setVelocityX(1000);
+                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, skinProj, damageProj);
                         }
                         else if (this.directionX == "left" && this.inCrounch == true) {
-                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, "fire", 3).setVelocityX(-1000);
+                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, skinProj, damageProj);
                         }
-                        this.scene.physics.add.collider(this.proj, this.scene.breakFire, this.proj.breakFire, null, this.scene);
-                    }
-                    else if (this.inMouth == "berry") {
-                        if (this.directionX == "right" && this.inCrounch == false) {
-                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 64, "berryShoot", 2).setVelocityX(1000);
+                        if (skinProj = "fire") {
+                            this.scene.physics.add.collider(this.proj, this.scene.breakFire, this.proj.breakFire, null, this.scene);
                         }
-                        else if (this.directionX == "left" && this.inCrounch == false) {
-                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, "berryShoot", 2).setVelocityX(-1000);
+                        this.scene.playerProj.add(this.proj);
+                        this.proj.setGravity(0, -gravityProj);
+                        if (this.directionX == "right") {
+                            this.proj.setVelocityX(1000);
                         }
-                        else if (this.directionX == "right" && this.inCrounch == true) {
-                            this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, "berryShoot", 2).setVelocityX(1000);
+                        else {
+                            this.proj.setVelocityX(-1000);
                         }
-                        else if (this.directionX == "left" && this.inCrounch == true) {
-                            this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, "berryShoot", 2).setVelocityX(-1000);
-                        }
-                    }
-
-                    if (this.inMouth != "") {
-                        this.scene.physics.add.collider(this.proj, this.scene.wall, this.proj.beDestroy, null, this.scene);
-                        this.scene.physics.add.overlap(this.proj, this.scene.mobAgressif, this.proj.doDamage, null, this.scene);
                         this.scene.time.delayedCall(100, () => { this.inAction = false; this.inShoot = false }, [], this);
                         this.inMouth = "";
                     }
                 }
-
-
                 //Saut
                 if (this.keySpace.isDown && this.body.blocked.down && this.inShoot == false && this.inCrounch == false) {
                     this.chargeJump += 1;
@@ -251,7 +256,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 }
             }
         }
-
 
         //Nage
         else {
@@ -421,15 +425,60 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         eventsCenter.emit('updateHealth', this.health);
     }
 
-    //Verifaction Etat Déplacement
-    enterWater(player) {
-        player.inWater = true;
+    //Gestion prise de dégâts
+    playerLoseHp(damage, entity) {
+        this.health -= damage
+        this.getHit = true;
+        this.inAction = true;
+        this.scene.time.delayedCall(500, () => { this.inAction = false }, [], this);
+        if (this.health <= 0) {
+            this.respawn();
+        }
+        else {
+            this.playerKnockback(entity)
+            this.invisible()
+        }
     }
 
-    onPlantGrab(player) {
-        player.onPlant = true;
+    playerKnockback(entity) {
+        if (entity.body.touching.right) {
+            this.body.setVelocity(200, -60);
+        }
+        else if (entity.body.touching.left) {
+            this.body.setVelocity(-200, -60);
+        }
+        else if (entity.body.touching.up) {
+            this.body.setVelocity(-60, -200);
+        }
+        else if (entity.body.touching.down) {
+            this.body.setVelocity(60, 200);
+        }
     }
 
+    //I Frame
+    visible() {
+        this.setTint()
+        this.clignotement -= 1;
+        if (this.clignotement == 0) {
+            this.clignotement = 3;
+            this.getHit = false;
+        }
+        else {
+            this.scene.time.delayedCall(200, () => { this.invisible() }, [], this);
+        }
+    }
+
+    invisible() {
+        this.setTint(0xff0000)
+        this.scene.time.delayedCall(200, () => { this.visible() }, [], this);
+    }
+
+    //Respawn
+    respawn() {
+        this.x = this.respawnX;
+        this.y = this.respawnY;
+        this.health = 5;
+    }
 
     //Récupération Projectile
     getBerry(player, berry) {
@@ -447,8 +496,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     eatMoustique(player, moustique) {
-        moustique.destroy();
-        this.events.off(Phaser.Scenes.Events.UPDATE, moustique.update, moustique);
+        moustique.getDestroy();
         player.health += 1
         if (player.health > 5) {
             player.health = 5;
@@ -462,71 +510,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         else {
             return false;
         }
-    }
-
-    //Gestion prise de dégâts
-    getDamagedByAgro(player, mob) {
-        player.health -= 1;
-        player.getHit = true;
-        player.invisible(player)
-        player.inAction = true;
-        mob.doHit = true;
-        if (player.health == 0) {
-            player.respawn();
-        }
-        if (mob.typeE == "mobAgro") {
-            if (mob.body.touching.right) {
-                player.body.setVelocity(200, -60);
-                mob.body.setVelocity(-200, -60);
-                console.log("Right")
-            }
-            else if (mob.body.touching.left) {
-                player.body.setVelocity(-200, -60);
-                mob.body.setVelocity(200, -60);
-            }
-            else if (mob.body.touching.up) {
-                player.body.setVelocity(-60, -200);
-                mob.body.setVelocity(60, -200);
-            }
-            else if (mob.body.touching.down) {
-                player.body.setVelocity(60, 200);
-                mob.body.setVelocity(-60, 200);
-            }
-        }
-        this.time.delayedCall(1000, () => { mob.doHit = false }, [mob], this);
-        this.time.delayedCall(300, () => { player.inAction = false }, [player], this);
-    }
-
-    canBeHit(player, mob) {
-        if (player.getHit == true) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    //I Frame
-    visible(player) {
-        player.setTint()
-        this.clignotement -= 1;
-        if (this.clignotement == 0) {
-            this.clignotement = 3;
-            this.getHit = false;
-        }
-        else {
-            this.scene.time.delayedCall(100, (player) => { player.invisible(player) }, [player], this);
-        }
-    }
-
-    invisible(player) {
-        player.setTint(0xff0000)
-        this.scene.time.delayedCall(100, (player) => { player.visible(player) }, [player], this);
-    }
-
-    respawn() {
-        this.x = this.respawnX;
-        this.y = this.respawnY;
-        this.health = 5;
     }
 
 }

@@ -1,5 +1,5 @@
-//import eventsCenter from "./EventsCenter.js"
-export class Hat extends Phaser.Physics.Arcade.Sprite {
+import { Entity } from "./Entity.js";
+export class Hat extends Entity {
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
         scene.add.existing(this);

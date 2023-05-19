@@ -1,4 +1,5 @@
-export class MobAgressif extends Phaser.Physics.Arcade.Sprite {
+import { Entity } from "./Entity.js";
+export class MobAgressif extends Entity {
     constructor(scene, x, y, skin) {
         super(scene, x, y, skin);
         this.skin = skin;
@@ -20,8 +21,7 @@ export class MobAgressif extends Phaser.Physics.Arcade.Sprite {
         this.goBack = false;
         this.typeE = "mobAgro"
 
-        this.getHit = false;
-        this.doHit = false;
+        this.hit = false;
 
         //Parametre
         this.setGravity(0, -800);
@@ -38,7 +38,7 @@ export class MobAgressif extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        if (this.getHit == false && this.doHit == false) {
+        if (!this.hit) {
             //In Agro
             if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 600 && this.goBack == false) {
                 this.inAgro = true;
@@ -67,10 +67,20 @@ export class MobAgressif extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    //Récupération Joueur
-    getPlayer(target) {
-        this.target = target;
+    mobKnockback(){
+        this.hit = true;
+        this.scene.time.delayedCall(1000, () => { this.hit = false }, [], this);
+        if (this.body.touching.right) {
+            this.body.setVelocity(-200, -60);
+        }
+        else if (this.body.touching.left) {
+            this.body.setVelocity(200, -60);
+        }
+        else if (this.body.touching.up) {
+            this.body.setVelocity(60, -200);
+        }
+        else if (this.body.touching.down) {
+            this.body.setVelocity(-60, 200);
+        }
     }
-
-
 }

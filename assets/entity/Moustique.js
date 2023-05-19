@@ -1,4 +1,5 @@
-export class Moustique extends Phaser.Physics.Arcade.Sprite {
+import { Entity } from "./Entity.js";
+export class Moustique extends Entity {
     constructor(scene, x, y) {
         super(scene, x, y, "moustique");
         scene.add.existing(this);

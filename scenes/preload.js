@@ -49,6 +49,9 @@ export class Preload extends Phaser.Scene {
         this.load.spritesheet("berryShoot", "../assets/berry.png",
             { frameWidth: 32, frameHeight: 32 });
 
+        this.load.spritesheet("spiderProj", "../assets/spiderShoot.png",
+            { frameWidth: 32, frameHeight: 32 });
+
         //Image
         this.load.image('logoMainScreen', "../assets/logoMainScreen.png");
         this.load.image('launchGame', "../assets/launchGame.png");
@@ -164,6 +167,13 @@ export class Preload extends Phaser.Scene {
         this.anims.create({
             key: 'fireProj',
             frames: [{ key: 'fire', frame: 0 }],
+            frameRate: 20
+        });
+
+        //Spider Proj
+        this.anims.create({
+            key: 'spiderShoot',
+            frames: [{ key: 'spiderProj', frame: 0 }],
             frameRate: 20
         });
 

@@ -1,5 +1,5 @@
-//import eventsCenter from "./EventsCenter.js"
-export class TongEnd extends Phaser.Physics.Arcade.Sprite {
+import { Entity } from "./Entity.js";
+export class TongEnd extends Entity {
     constructor(scene, x, y) {
         super(scene, x, y, "tongEnd");
         scene.add.existing(this);
@@ -88,7 +88,7 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
     gotBerry(shoot, berry) {
         let berryX = berry.x;
         let berryY = berry.y;
-        this.time.delayedCall(5000, () => { this.berry.create(berryX, berryY, "berry").setDepth(-1) }, [], this);
+        if (!berry.getGrab) { this.time.delayedCall(5000, () => { this.berry.create(berryX, berryY, "berry").setDepth(-1) }, [], this); }
         shoot.movement = false;
         berry.getGrab = true;
         if (shoot.targetInCrounch == false) {
@@ -112,30 +112,10 @@ export class TongEnd extends Phaser.Physics.Arcade.Sprite {
 
     //Prise de dégâts
     doDamage(tong, mob) {
-        console.log("Test")
         tong.movement = false;
-        mob.health -= 1;
-        mob.getHit = true;
-        mob.setTint(0xff0000)
-        if (mob.health <= 0) {
-            mob.destroy();
-            this.events.off(Phaser.Scenes.Events.UPDATE, mob.update, mob);
-        }
-
         if (mob.typeE == "mobAgro") {
-            if (tong.body.touching.right) {
-                mob.body.setVelocity(200, -60);
-            }
-            else if (tong.body.touching.left) {
-                mob.body.setVelocity(-200, -60);
-            }
-            else if (tong.body.touching.up) {
-                mob.body.setVelocity(-60, -200);
-            }
-            else if (tong.body.touching.down) {
-                mob.body.setVelocity(60, 200);
-            }
+            mob.mobKnockback();
         }
-        this.time.delayedCall(200, (mob) => { mob.getHit = false; mob.setTint() }, [mob], this);
+        mob.loseHp(1);
     }
 }

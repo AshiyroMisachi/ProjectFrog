@@ -1,5 +1,6 @@
+import { Entity } from "./Entity.js";
 import { ProjSentry } from "./ProjSentry.js";
-export class MobSentry extends Phaser.Physics.Arcade.Sprite {
+export class MobSentry extends Entity {
     constructor(scene, x, y, skin) {
         super(scene, x, y, skin);
         this.skin = skin;
@@ -20,7 +21,6 @@ export class MobSentry extends Phaser.Physics.Arcade.Sprite {
         this.getHit = false;
         this.doHit = false;
 
-
         //Parametre
         this.setGravity(0, -800);
 
@@ -39,16 +39,10 @@ export class MobSentry extends Phaser.Physics.Arcade.Sprite {
         if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 500 && this.shootCD == true){
             console.log("Shoot")
             this.shoot = new ProjSentry(this.scene, this.x, this.y, "spiderShoot");
+            this.scene.mob_proj.add(this.shoot);
             this.scene.physics.moveToObject(this.shoot, this.target, 300)
             this.shootCD = false;
-            this.scene.time.delayedCall(2000, ()=>{ this.shootCD = true }, [], this);
+            this.scene.time.delayedCall(3000, ()=>{ this.shootCD = true }, [], this);
         }
     }
-
-    //Récupération Joueur
-    getPlayer(target) {
-        this.target = target;
-    }
-
-
 }
