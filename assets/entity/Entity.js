@@ -5,8 +5,10 @@ export class Entity extends Phaser.Physics.Arcade.Sprite {
 
     //Gestion Prise de damage
     getDestroy() {
+        console.log("Test avant kill")
         this.scene.events.off(Phaser.Scenes.Events.UPDATE, this.update, this);
         this.destroy();
+        console.log(this)
     }
 
     canBeHit(entity) {

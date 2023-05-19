@@ -1,6 +1,7 @@
 import { Player } from "../assets/entity/Player.js";
 import { MobAgressif } from "../assets/entity/MobAgressif.js";
 import { MobSentry } from "../assets/entity/MobSentry.js";
+import { MobObstacle } from "../assets/entity/MobObstacle.js";
 import { Hat } from "../assets/entity/Hat.js";
 import { Moustique } from "../assets/entity/Moustique.js"
 import { game } from "./script.js";
@@ -108,6 +109,10 @@ export class SceneTemplate extends Phaser.Scene {
             else if (spawn.type == "spider") {
                 poMobA = new MobSentry(this, spawn.x, spawn.y + 32, "mobSpider").setPushable(false);
             }
+            //Mob Obstacle
+            else if (spawn.type == "sangsue") {
+                poMobA = new MobObstacle(this, spawn.x, spawn.y + 32, "mobSangsue").setPushable(false);
+            }
             poMobA.getPlayer(this.player);
             this.mobAgressif.add(poMobA);
         });
@@ -154,6 +159,8 @@ export class SceneTemplate extends Phaser.Scene {
         //MOB
         //Bordure
         this.physics.add.collider(this.mobAgressif, this.wall);
+        //Etat
+        this.physics.add.overlap(this.mobAgressif, this.waterCheck, (mob)=>{ mob.inWater = true }, null, this);
         //Damage
         this.physics.add.overlap(this.mobAgressif, this.playerProj, this.mobGetDamagedByProj, null, this);
     }

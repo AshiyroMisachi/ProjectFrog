@@ -31,12 +31,13 @@ export class Preload extends Phaser.Scene {
         //Mob
         this.load.spritesheet('mobGuepe', '../assets/spritesheet/guepeSS.png',
             { frameWidth: 32, frameHeight: 64 });
+        this.load.spritesheet('mobSpider', '../assets/spritesheet/spiderSS.png',
+            { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('mobSangsue', '../assets/spritesheet/sangsueSS.png',
+            { frameWidth: 64, frameHeight: 160 });
 
         this.load.spritesheet('moustique', '../assets/spritesheet/moustique.png',
             { frameWidth: 32, frameHeight: 32 });
-
-        this.load.spritesheet('mobSpider', '../assets/spritesheet/spiderSS.png',
-            { frameWidth: 64, frameHeight: 64 });
 
         //Texture Obstacle
         this.load.image("plantGrab", "../assets/planteGrab.png");
@@ -195,6 +196,13 @@ export class Preload extends Phaser.Scene {
             this.anims.create({
                 key: 'spider_base',
                 frames: [{ key: 'mobSpider', frame: 0 }],
+                frameRate: 20
+            });
+
+            //Sangsue
+            this.anims.create({
+                key: 'sangsue_base',
+                frames: [{ key: 'mobSangsue', frame:0}],
                 frameRate: 20
             });
 
