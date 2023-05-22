@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="300" height="200" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="40">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="300" height="200" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="41">
  <tileset firstgid="1" source="../../Mushroom-Gang/alpha_V01/maps/tileset_test.tsx"/>
  <layer id="4" name="eau" width="300" height="200">
   <data encoding="csv">
@@ -817,7 +817,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="oui">
+ <objectgroup id="3" name="oui" visible="0">
   <object id="1" name="Hat" x="6004.85" y="6875.76">
    <point/>
   </object>
@@ -884,6 +884,9 @@
    <point/>
   </object>
   <object id="39" name="Plateforme Mouvante" x="15600" y="9760">
+   <point/>
+  </object>
+  <object id="40" name="Grotte" x="19152" y="11264">
    <point/>
   </object>
  </objectgroup>
