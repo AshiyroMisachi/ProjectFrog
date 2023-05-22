@@ -16,6 +16,7 @@ var config = {
         arcade: {
             gravity: { y: 800 },
             debug: true,
+            tileBias: 64
         },
     },
     fps: {target: 60, forceSetTimeOut: true},

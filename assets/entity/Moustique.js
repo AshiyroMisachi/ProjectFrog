@@ -20,7 +20,6 @@ export class Moustique extends Entity {
         this.changeDirection = false;
         this.outZone = false;
         this.getGrab = false;
-        console.log(this.spawnY)
 
         //Parametre
         this.setGravity(0, -800)
@@ -60,7 +59,6 @@ export class Moustique extends Entity {
     }
 
     backToSpawn() {
-        console.log("OutZone")
         this.scene.physics.moveTo(this, this.spawnX, this.spawnY, 100);
         this.outZone = true;
         this.scene.time.delayedCall(3000, () => { this.outZone = false }, [], this);

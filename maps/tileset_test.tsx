@@ -11,4 +11,9 @@
    <property name="isSolid" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="3">
+  <properties>
+   <property name="isSolid" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>

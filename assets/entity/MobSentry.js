@@ -37,7 +37,6 @@ export class MobSentry extends Entity {
 
     update() {
         if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 500 && this.shootCD == true){
-            console.log("Shoot")
             this.shoot = new ProjSentry(this.scene, this.x, this.y, "spiderShoot");
             this.scene.mob_proj.add(this.shoot);
             this.scene.physics.moveToObject(this.shoot, this.target, 300)

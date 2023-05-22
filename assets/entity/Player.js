@@ -252,7 +252,9 @@ export class Player extends Entity {
                 }
                 if (!this.body.blocked.down) {
                     this.chargeJump = 0;
-                    this.inJump = false;
+                    if (this.body.velocity.y > (-50)){
+                        this.setVelocityY(this.body.velocity.y + 20);
+                    }
                 }
             }
         }
@@ -429,15 +431,16 @@ export class Player extends Entity {
     playerLoseHp(damage, entity) {
         this.health -= damage
         this.getHit = true;
-        this.inAction = true;
-        this.scene.time.delayedCall(500, () => { this.inAction = false }, [], this);
         if (this.health <= 0) {
             this.respawn();
+            console.log("respawn")
         }
-        else {
+        else if (entity != null) {
+            this.inAction = true;
+            this.scene.time.delayedCall(500, () => { this.inAction = false }, [], this);
             this.playerKnockback(entity)
-            this.invisible()
         }
+        this.invisible()
     }
 
     playerKnockback(entity) {

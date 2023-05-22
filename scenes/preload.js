@@ -38,11 +38,14 @@ export class Preload extends Phaser.Scene {
 
         this.load.spritesheet('moustique', '../assets/spritesheet/moustique.png',
             { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('escargot', '../assets/spritesheet/escargotSS.png',
+            { frameWidth: 192, frameHeight: 64 });
 
         //Texture Obstacle
         this.load.image("plantGrab", "../assets/planteGrab.png");
         this.load.image("breakFire", "../assets/breakFire.png");
         this.load.image("berry", "../assets/berry.png");
+        this.load.image("ronces", "../assets/ronces.png");
 
         //Texture Proj
         this.load.spritesheet("fire", "../assets/fire.png",
@@ -202,7 +205,7 @@ export class Preload extends Phaser.Scene {
             //Sangsue
             this.anims.create({
                 key: 'sangsue_base',
-                frames: [{ key: 'mobSangsue', frame:0}],
+                frames: [{ key: 'mobSangsue', frame: 0 }],
                 frameRate: 20
             });
 
@@ -210,6 +213,13 @@ export class Preload extends Phaser.Scene {
             this.anims.create({
                 key: 'moustique_mouv',
                 frames: [{ key: 'moustique', frame: 0 }],
+                frameRate: 20
+            });
+
+            //Escargot
+            this.anims.create({
+                key: 'escargot_mouv',
+                frames: [{ key: 'escargot', frame: 0 }],
                 frameRate: 20
             });
 
