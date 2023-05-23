@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="282" height="90" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="33">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="282" height="90" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="33">
  <tileset firstgid="1" source="tileset_test.tsx"/>
  <layer id="3" name="eau" width="282" height="90">
   <data encoding="csv">
