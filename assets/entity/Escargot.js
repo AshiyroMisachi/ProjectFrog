@@ -11,7 +11,12 @@ export class Escargot extends Entity {
 
     init() {
         //Variable
-        this.speed = 50;
+        if (this.direction == "right"){
+            this.speed = 50;
+        }
+        else {
+            this.speed = -50;
+        }
         this.spawnX = this.x;
         this.spawnY = this.y;
         this.start = true;
@@ -41,6 +46,10 @@ export class Escargot extends Entity {
             this.speed = this.speed * (-1);
             this.setVelocityX(this.speed);
         }
+    }
+
+    getDirection(direction){
+        this.direction = direction;
     }
 }
 

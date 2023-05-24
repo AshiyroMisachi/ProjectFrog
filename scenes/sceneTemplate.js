@@ -12,18 +12,19 @@ export class SceneTemplate extends Phaser.Scene {
     }
 
     //Load Tiled
-    loadMap(jsonTiled) {
+    loadMap(jsonTiled, png, tsx) {
         //Atribution map
         this.carteDuNiveau = this.add.tilemap(jsonTiled);
-        this.tileset = this.carteDuNiveau.addTilesetImage("tileset_test", "tileset_Test");
+        this.tileset = this.carteDuNiveau.addTilesetImage(png, tsx);
 
         //Chargement Calques Tuiles
-        this.wall = this.carteDuNiveau.createLayer("base", this.tileset).setDepth(-2);
-        this.plateform = this.carteDuNiveau.createLayer("plateforme", this.tileset).setDepth(-2);
+        this.background = this.carteDuNiveau.createLayer("fond", this.tileset).setDepth(-2);
         this.water = this.carteDuNiveau.createLayer("eau", this.tileset).setDepth(-2);
-        this.bushPlace = this.carteDuNiveau.createLayer("buisson", this.tileset).setDepth(-2);
+        this.wall = this.carteDuNiveau.createLayer("base", this.tileset).setDepth(-2);
+        
 
         //Récupération Calques Objets
+        this.calque_waterPoisonousCheck = this.carteDuNiveau.getObjectLayer('waterPoisonousCheck');
         this.calque_waterCheck = this.carteDuNiveau.getObjectLayer('waterCheck');
         this.calque_placeHat = this.carteDuNiveau.getObjectLayer('placeHat');
         this.calque_placeObstacle = this.carteDuNiveau.getObjectLayer('obstacle');
@@ -32,13 +33,16 @@ export class SceneTemplate extends Phaser.Scene {
 
         //Calques Solides
         this.wall.setCollisionByProperty({ isSolid: true });
-        this.plateform.setCollisionByProperty({ isSolid: true });
     }
 
     //Création Joueur
     loadPlayer(spawnX, spawnY) {
         //Création Joueur
         this.player = new Player(this, spawnX, spawnY).setDepth(1);
+        this.player.health =  this.playerHealth;
+        this.player.inMouth = this.playerInMouth;
+        this.player.unlock = this.playerUnlock;
+        this.player.currentHat = this.playerCurrentHat;
 
         //Création Groupe  Proj Joueur
         this.playerProj = this.physics.add.group();
@@ -48,8 +52,24 @@ export class SceneTemplate extends Phaser.Scene {
     loadObject() {
         //Placement Check Eau
         this.waterCheck = this.physics.add.group({ allowGravity: false });
+        this.waterPoisonousCheck = this.physics.add.group({ allowGravity: false });
         this.calque_waterCheck.objects.forEach(calque_waterCheck => {
-            const POwaterCheck = this.waterCheck.create(calque_waterCheck.x + 672, calque_waterCheck.y + 640, "waterCheckIMG");
+            if (calque_waterCheck.type == "little"){
+                const POwaterCheck = this.waterCheck.create(calque_waterCheck.x + 352, calque_waterCheck.y + 160, "waterCheckLittleIMG");
+            }
+            else {
+               const POwaterCheck = this.waterCheck.create(calque_waterCheck.x + 672, calque_waterCheck.y + 640, "waterCheckIMG"); 
+            }
+            
+        });
+
+        this.calque_waterPoisonousCheck.objects.forEach(calque_waterPoisonousCheck => {
+            if (calque_waterPoisonousCheck.type == "little"){
+                const POwaterCheck = this.waterPoisonousCheck.create(calque_waterPoisonousCheck.x + 352, calque_waterPoisonousCheck.y + 160, "waterCheckLittleIMG");
+            }
+            else {
+                const POwaterCheck = this.waterPoisonousCheck.create(calque_waterPoisonousCheck.x + 672, calque_waterPoisonousCheck.y + 640, "waterCheckIMG"); 
+            }
         });
 
         //Placement Chapeau power_up
@@ -79,10 +99,19 @@ export class SceneTemplate extends Phaser.Scene {
         this.calque_placeObstacle.objects.forEach(spawn => {
             let poObs = null;
             if (spawn.type == "grab") {
-                poObs = this.plantGrab.create(spawn.x, spawn.y - 128, "plantGrab");
+                poObs = this.plantGrab.create(spawn.x + 32, spawn.y - 128, "plantGrab");
             }
             else if (spawn.type == "breakFire") {
                 poObs = this.breakFire.create(spawn.x, spawn.y - 32, "breakFire");
+            }
+            else if (spawn.type == "breakFire12") {
+                poObs = this.breakFire.create(spawn.x + 32, spawn.y - 320, "breakFire12");
+            }
+            else if (spawn.type == "breakFire10") {
+                poObs = this.breakFire.create(spawn.x + 32, spawn.y - 256, "breakFire10");
+            }
+            else if (spawn.type == "breakFire5") {
+                poObs = this.breakFire.create(spawn.x + 32, spawn.y - 96, "breakFire5");
             }
             else if (spawn.type == "berry") {
                 poObs = this.berry.create(spawn.x, spawn.y, "berry").setPushable(false);
@@ -137,8 +166,14 @@ export class SceneTemplate extends Phaser.Scene {
                 this.moustique.add(poMous);
             }
             //Escargot, Bullet
-            else if (spawn.type == "escargot") {
+            else if (spawn.type == "libelluleR") {
                 poMous = new Escargot(this, spawn.x, spawn.y).setPushable(false);
+                poMous.getDirection("right");
+                this.libellule.add(poMous);
+            }
+            else if (spawn.type == "libelluleL") {
+                poMous = new Escargot(this, spawn.x, spawn.y).setPushable(false);
+                poMous.getDirection("left");
                 this.libellule.add(poMous);
             }
         });
@@ -149,11 +184,12 @@ export class SceneTemplate extends Phaser.Scene {
         //PLAYER
         //Bordure
         this.physics.add.collider(this.player, this.wall);
-        this.physics.add.collider(this.player, this.plateform);
         this.physics.add.collider(this.player, this.breakFire);
         this.physics.add.collider(this.player, this.libellule);
         //Etat 
         this.physics.add.overlap(this.player, this.waterCheck, () => { this.player.inWater = true }, null, this);
+        this.physics.add.overlap(this.player, this.waterPoisonousCheck, () => { this.player.inWater = true; this.player.playerLoseHp(1, null) }, this.player.canBeHit, this);
+        this.physics.add.overlap(this.player, this.waterPoisonousCheck, () => { this.player.inWater = true; }, null, this);
         this.physics.add.overlap(this.player, this.plantGrab, () => { this.player.onPlant = true }, null, this);
         //Collect
         this.physics.add.overlap(this.player, this.berry, this.player.getBerry, this.player.canGetBerry, this);
@@ -166,19 +202,16 @@ export class SceneTemplate extends Phaser.Scene {
 
         //PROJ
         this.physics.add.collider(this.playerProj, this.wall, (proj) => { proj.getDestroy() }, null, this);
-        this.physics.add.collider(this.playerProj, this.plateform, (proj) => { proj.getDestroy() }, null, this);
         this.physics.add.collider(this.mob_proj, this.wall, (proj) => { proj.getDestroy() }, null, this);
-        this.physics.add.collider(this.mob_proj, this.plateform, (proj) => { proj.getDestroy() }, null, this);
 
         //MOB
         //Bordure
         this.physics.add.collider(this.mobAgressif, this.wall);
         this.physics.add.collider(this.libellule, this.wall);
-        this.physics.add.collider(this.libellule, this.plateform);
         this.physics.add.collider(this.moustique, this.wall);
-        this.physics.add.collider(this.moustique, this.plateform);
         //Etat
         this.physics.add.overlap(this.mobAgressif, this.waterCheck, (mob) => { mob.inWater = true }, null, this);
+        this.physics.add.overlap(this.mobAgressif, this.waterPoisonousCheck, (mob) => { mob.inWater = true }, null, this);
         //Damage
         this.physics.add.overlap(this.mobAgressif, this.playerProj, this.mobGetDamagedByProj, null, this);
     }
@@ -197,7 +230,7 @@ export class SceneTemplate extends Phaser.Scene {
         mob.hit = true;
         this.time.delayedCall(1000, () => { mob.hit = false }, [mob], this);
         if (mob.typeE == "mobAgro") {
-            mob.mobKnockBack()
+            mob.mobKnockback()
         }
     }
 

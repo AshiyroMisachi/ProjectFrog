@@ -28,6 +28,13 @@ export class MainScreen extends Phaser.Scene {
     }
 
     launchGame() {
-        this.scene.start("sceneTest");
+        this.scene.start("scene01",{
+            player_spawnX : 4112,
+            player_spawnY : 5320,
+            playerHealth : 5,
+            playerInMouth: "",
+            playerUnlock: [false, false, false],
+            playerCurrentHat: 0
+        });
     }
 }

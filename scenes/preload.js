@@ -6,7 +6,11 @@ export class Preload extends Phaser.Scene {
     preload() {
         //Map Tiled
         this.load.image("tileset_Test", "../maps/tileset_test.png");
+        this.load.image("tileset_PlaceHolder", "../maps/tileset_placeHolder.png");
         this.load.tilemapTiledJSON("sceneTest", "../assets/json/sceneTest.json");
+        this.load.tilemapTiledJSON("etang", "../assets/json/etang.json");
+        this.load.tilemapTiledJSON("marais", "../assets/json/marais.json");
+        this.load.tilemapTiledJSON("grotte", "../assets/json/grotte.json");
 
         //SpriteSheet
         this.load.spritesheet('perso', '../assets/spritesheet/persoSS.png',
@@ -44,6 +48,9 @@ export class Preload extends Phaser.Scene {
         //Texture Obstacle
         this.load.image("plantGrab", "../assets/planteGrab.png");
         this.load.image("breakFire", "../assets/breakFire.png");
+        this.load.image("breakFire12", "../assets/breakFire12.png");
+        this.load.image("breakFire10", "../assets/breakFire10.png");
+        this.load.image("breakFire5", "../assets/breakFire5.png");
         this.load.image("berry", "../assets/berry.png");
         this.load.image("ronces", "../assets/ronces.png");
 
@@ -62,6 +69,9 @@ export class Preload extends Phaser.Scene {
 
         //DevIMG
         this.load.image('waterCheckIMG', '../assets/waterCheck.png');
+        this.load.image('waterCheckLittleIMG', '../assets/waterCheckLittle.png');
+        this.load.image('Travel5', '../assets/Travel5.png');
+        this.load.image('Travel8', '../assets/Travel8.png');
     }
 
     create() {

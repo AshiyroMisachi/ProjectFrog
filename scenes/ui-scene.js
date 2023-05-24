@@ -17,6 +17,7 @@ export class UiScene extends Phaser.Scene
 
 	create()
 	{
+		this.scene.bringToTop()
 		//Gestion Cadre Hat
 		this.cadre = this.physics.add.sprite(110, 100, "cadreHat").setScale(4);
 		this.cadre.anims.play('empty');

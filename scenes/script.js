@@ -3,6 +3,9 @@ import { Preload } from "./preload.js";
 import { MainScreen } from "./mainScreen.js";
 import { SceneTest as SceneTest } from "./sceneTest.js";
 import { UiScene } from "./ui-scene.js";
+import { Scene01 } from "./scene01.js";
+import { Scene02 } from "./scene02.js";
+import { Scene03 } from "./scene03.js";
 
 ///EVENT EMITER///
 export const eventsCenter = new Phaser.Events.EventEmitter()
@@ -21,7 +24,7 @@ var config = {
     },
     fps: {target: 60, forceSetTimeOut: true},
     pixelArt: true,
-    scene: [Preload, MainScreen, SceneTest, UiScene]
+    scene: [Preload, MainScreen, SceneTest, UiScene, Scene01, Scene02, Scene03]
 }
 
 export var game = new Phaser.Game(config);

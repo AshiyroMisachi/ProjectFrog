@@ -11,7 +11,7 @@ export class SceneTest extends SceneTemplate {
     
     create() {
         this.scene.run('ui-scene');
-        this.loadMap("sceneTest");
+        this.loadMap("sceneTest", "tileset_test", "tileset_Test");
         this.loadPlayer(this.player_spawnX, this.player_spawnY);
         this.loadObject();
         this.loadEnnemies();
