@@ -14,6 +14,7 @@ export class Scene01 extends SceneTemplate {
     }
 
     create() {
+        this.add.image(0, 0, 'bgEtang').setOrigin(0,0).setDepth(-3);
         this.loadMap("etang", "tileset_placeHolder", "tileset_PlaceHolder");
         this.loadPlayer(this.player_spawnX, this.player_spawnY);
         this.loadObject();
