@@ -14,6 +14,7 @@ export class Scene02 extends SceneTemplate {
     }
     
     create() {
+        this.add.image(0, 0, 'bgMarais').setOrigin(0,0).setDepth(-3).setScale(4).setScrollFactor(0.6);
         this.loadMap("marais", "tileset_placeHolder", "tileset_PlaceHolder");
         this.loadPlayer(this.player_spawnX, this.player_spawnY);
         this.loadObject();

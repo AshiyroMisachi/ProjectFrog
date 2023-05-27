@@ -21,7 +21,7 @@ export class Player extends Entity {
         this.getHit = false
         this.clignotement = 3;
 
-        this.speed = 300;
+        this.speed = 500;
         this.jumpSpeed = 660;
         this.dashSpeed = 900;
         this.climbSpeed = 200;
