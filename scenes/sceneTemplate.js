@@ -221,6 +221,7 @@ export class SceneTemplate extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, width, height);
         this.cameras.main.setBounds(0, 0, width, height);
         this.cameras.main.startFollow(target);
+        this.cameras.main.setZoom(0.6)
     }
 
     //AUTRES FONCTIONS
