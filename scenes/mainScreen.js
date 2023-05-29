@@ -15,15 +15,22 @@ export class MainScreen extends Phaser.Scene {
     }
 
     create(){
+        /*
         //Add Image
         this.logo = this.add.image(400, 150, "logoMainScreen").setInteractive().setScale(0.75).setOrigin( 0, 0);
         this.launchButton = this.add.image(350, 700, "launchGame").setInteractive().setScale(1.25).setOrigin( 0, 0);
 
         //Create Interaction
         this.launchButton.on("pointerdown", this.launchGame, this);
+        */
+       this.add.image(0, 0, "mainScreenIMG").setOrigin(0,0)
+       this.cursors = this.input.keyboard.createCursorKeys();
     }
 
-    update(){
+    update(){  
+        if (this.cursors.space.isDown){
+            this.launchGame()
+        }
 
     }
 
