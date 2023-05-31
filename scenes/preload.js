@@ -221,15 +221,17 @@ export class Preload extends Phaser.Scene {
             //Sangsue
             this.anims.create({
                 key: 'sangsue_base',
-                frames: [{ key: 'mobSangsue', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('mobSangsue', {start:0,end:10}),
+                frameRate: 5,
+                repeat : -1
             });
 
             //Moustique
             this.anims.create({
                 key: 'moustique_mouv',
-                frames: [{ key: 'moustique', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('moustique', {start:0,end:6}),
+                frameRate: 5,
+                repeat : -1
             });
 
             //Escargot

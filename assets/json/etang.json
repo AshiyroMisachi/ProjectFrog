@@ -1133,6 +1133,18 @@
                  "width":64,
                  "x":15360,
                  "y":3968
+                }, 
+                {
+                 "height":0,
+                 "id":116,
+                 "name":"MobPassif",
+                 "point":true,
+                 "rotation":0,
+                 "type":"moustiqueA",
+                 "visible":true,
+                 "width":0,
+                 "x":5820,
+                 "y":5132
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1141,7 +1153,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":116,
+ "nextobjectid":117,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
