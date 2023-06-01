@@ -237,8 +237,9 @@ export class Preload extends Phaser.Scene {
             //Escargot
             this.anims.create({
                 key: 'escargot_mouv',
-                frames: [{ key: 'escargot', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('escargot', {start:0,end:8}),
+                frameRate: 2,
+                repeat : -1
             });
 
         }
