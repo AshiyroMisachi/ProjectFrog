@@ -202,13 +202,15 @@ export class Preload extends Phaser.Scene {
             //Guepe
             this.anims.create({
                 key: 'guepe_passif',
-                frames: [{ key: 'mobGuepe', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('mobGuepe', {start:0,end:1}),
+                frameRate: 5,
+                repeat : -1
             });
             this.anims.create({
                 key: 'guepe_agro',
-                frames: [{ key: 'mobGuepe', frame: 1 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('mobGuepe', {start:2,end:3}),
+                frameRate: 5,
+                repeat : -1
             });
 
             //Spider
