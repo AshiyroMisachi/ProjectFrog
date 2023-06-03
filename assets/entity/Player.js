@@ -76,26 +76,25 @@ export class Player extends Entity {
                     this.onPlant = false;
                     if (this.keyQ.isDown) {
                         this.setVelocityX(-this.speed);
-                        this.anims.play('left_grab', true);
+                        this.anims.play('player_grab', true);
                         this.directionX = "left";
                     }
                     else if (this.keyD.isDown) {
                         this.setVelocityX(this.speed);
-                        this.anims.play('right_grab', true);
+                        this.anims.play('player_grab', true);
                         this.directionX = "right";
                     }
                     else if (this.inAction == false) {
                         this.setVelocityX(0);
-                        this.anims.play('standby_grab');
                     }
 
                     if (this.keyZ.isDown) {
                         this.setVelocityY(-this.climbSpeed);
-                        this.anims.play('climb_grab');
+                        this.anims.play('player_grab', true);
                     }
                     else if (this.keyS.isDown) {
                         this.setVelocityY(this.climbSpeed)
-                        this.anims.play('climb_grab');
+                        this.anims.play('player_grab', true);
                     }
                     else {
                         this.setVelocityY(0);
@@ -114,16 +113,18 @@ export class Player extends Entity {
                             if (this.keyQ.isDown) {
                                 this.setVelocityX(-this.speed);
                                 this.directionX = "left";
-                                this.anims.play('crounchLeft');
+                                this.anims.play('player_shift_walk', true);
+                                this.setFlipX(true);
                             }
                             else if (this.keyD.isDown) {
                                 this.setVelocityX(this.speed);
                                 this.directionX = "right";
-                                this.anims.play('crounchRight');
+                                this.anims.play('player_shift_walk', true);
+                                this.setFlipX(false);
                             }
                             else {
                                 this.setVelocityX(0);
-                                this.anims.play('crounch');
+                                this.anims.play('player_shift', true);
                             }
                         }
                         else {
@@ -135,38 +136,46 @@ export class Player extends Entity {
                             this.setSize(128, 256);
                             if (this.keyQ.isDown) {
                                 this.setVelocityX(-this.speed);
-                                this.anims.play('left', true);
+                                this.anims.play('player_walk', true);
+                                this.setFlipX(true);
                                 this.directionX = "left";
                             }
                             else if (this.keyD.isDown) {
                                 this.setVelocityX(this.speed);
-                                this.anims.play('right', true);
+                                this.anims.play('player_walk', true);
+                                this.setFlipX(false);
                                 this.directionX = "right";
                             }
                             else {
                                 this.setVelocityX(0);
-                                this.anims.play('turn');
+                                this.anims.play('player_standBy', true);
                             }
                         }
                     }
 
                     //Tire
                     if (Phaser.Input.Keyboard.JustDown(this.keyI) && this.inAction == false) {
+                        if (this.inCrounch) {
+                            this.anims.play("player_shift_shoot");
+                        }
+                        else {
+                            this.anims.play("player_shoot")
+                        }
                         this.inAction = true;
                         this.inShoot = true;
                         this.setVelocityX(0);
                         if (this.inMouth == "") {
                             if (this.directionX == "right" && this.inCrounch == false) {
-                                this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 64);
+                                this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 64, "right").setScale(0.5);
                             }
                             else if (this.directionX == "left" && this.inCrounch == false) {
-                                this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 64);
+                                this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 64, "left").setScale(0.5);
                             }
                             else if (this.directionX == "right" && this.inCrounch == true) {
-                                this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 16);
+                                this.shoot = new TongEnd(this.scene, this.x + 80, this.y - 2, "right").setScale(0.5);
                             }
                             else if (this.directionX == "left" && this.inCrounch == true) {
-                                this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 16);
+                                this.shoot = new TongEnd(this.scene, this.x - 80, this.y - 2, "left").setScale(0.5);
                             }
                             this.scene.physics.add.collider(this.shoot, this.scene.wall, this.shoot.returnBack, null, this.scene);
                             this.scene.physics.add.collider(this.shoot, this.scene.berry, this.shoot.gotBerry, null, this.scene);
@@ -195,10 +204,10 @@ export class Player extends Entity {
                                 this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, skinProj, damageProj, "left");
                             }
                             else if (this.directionX == "right" && this.inCrounch == true) {
-                                this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, skinProj, damageProj, "right");
+                                this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 2, skinProj, damageProj, "right");
                             }
                             else if (this.directionX == "left" && this.inCrounch == true) {
-                                this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, skinProj, damageProj, "left");
+                                this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 2, skinProj, damageProj, "left");
                             }
                             if (skinProj = "fire") {
                                 this.scene.physics.add.collider(this.proj, this.scene.breakFire, this.proj.breakFire, null, this.scene);
@@ -222,19 +231,17 @@ export class Player extends Entity {
                         if (this.chargeJump > 20) {
                             this.inAction = true;
                             this.setVelocityX(0);
-                            this.anims.play('chargeJump');
+                            this.anims.play('player_chargeJump');
                         }
                     }
                     //Jump C0
                     if (this.keySpace.isUp && this.inJump && this.chargeJump <= 20 && this.body.blocked.down) {
-                        console.log("Jump C0");
                         this.inJump = false;
                         this.chargeJump = 0;
                         this.setVelocityY(-this.jumpSpeed);
                     }
                     //Jump c1
                     else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 20 && this.chargeJump <= 40)) {
-                        console.log("Jump C1");
                         this.inJump = false;
                         this.chargeJump = 0;
                         this.inAction = false;
@@ -242,7 +249,6 @@ export class Player extends Entity {
                     }
                     //JumpC2
                     else if (this.keySpace.isUp && this.inJump && (this.chargeJump > 40)) {
-                        console.log("Jump C2");
                         this.inJump = false;
                         this.chargeJump = 0;
                         this.inAction = false;
@@ -262,7 +268,7 @@ export class Player extends Entity {
                 //Setup
                 this.setGravity(0, -800);
                 this.inWater = false;
-                this.anims.play('swim');
+                this.anims.play('player_swim', true);
                 this.speed = 400
                 this.scene.time.delayedCall(200, () => (this.setSize(128, 192)), [], this)
 
@@ -334,32 +340,39 @@ export class Player extends Entity {
                 //Rotate
                 if (this.directionX == "left" && this.directionY == "down") {
                     this.setAngle(-135)
+                    this.setFlipX(true)
                 }
                 else if (this.directionX == "left" && this.directionY == "up") {
                     this.setAngle(-45)
+                    this.setFlipX(true)
                 }
                 else if (this.directionX == "right" && this.directionY == "down") {
                     this.setAngle(135)
+                    this.setFlipX(false)
                 }
                 else if (this.directionX == "right" && this.directionY == "up") {
                     this.setAngle(45)
+                    this.setFlipX(false)
                 }
                 else if (this.directionX == "right") {
                     this.setAngle(90);
-
+                    this.setFlipX(false)
                 }
                 else if (this.directionX == "left") {
-                    this.setAngle(-90)
-
+                    this.setAngle(-90);
+                    this.setFlipX(true)
                 }
                 else if (this.directionY == "down") {
                     this.setAngle(-180);
+                    this.setFlipX(false)
                 }
                 else if (this.directionY == "up") {
                     this.setAngle(180);
+                    this.setFlipX(false)
                 }
                 else {
                     this.setAngle(0);
+                    this.setFlipX(false)
                 }
 
                 //Dash

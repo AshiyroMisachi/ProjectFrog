@@ -17,14 +17,15 @@ export class Preload extends Phaser.Scene {
             { frameWidth: 128, frameHeight: 256 });
         this.load.spritesheet('tongEnd', '../assets/spritesheet/tong.png',
             { frameWidth: 32, frameHeight: 32 });
+        this.load.image("tong", "../assets/spritesheet/tongL.png");
 
         //Hat
         this.load.spritesheet('hatGrab', '../assets/spritesheet/hatGrab.png',
-            { frameWidth: 32, frameHeight: 32 });
+            { frameWidth: 22, frameHeight: 21 });
         this.load.spritesheet('hatGrow', '../assets/spritesheet/hatGrow.png',
-            { frameWidth: 32, frameHeight: 32 });
+            { frameWidth: 22, frameHeight: 21 });
         this.load.spritesheet('hatFire', '../assets/spritesheet/hatFire.png',
-            { frameWidth: 32, frameHeight: 32 });
+            { frameWidth: 22, frameHeight: 21 });
 
         //UI
         this.load.spritesheet('cadreHat', '../assets/spritesheet/cadrehat.png',
@@ -81,7 +82,7 @@ export class Preload extends Phaser.Scene {
     }
 
     create() {
-        //Animation Joueur//
+        //Animation Joueur// BETA
         {
             this.anims.create({
                 key: 'turn',
@@ -168,6 +169,73 @@ export class Preload extends Phaser.Scene {
             });
 
         }
+
+        //Animation Joueur
+        this.anims.create({
+            key: 'player_standBy',
+            frames: this.anims.generateFrameNumbers('perso', {start:20,end:21}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+        this.anims.create({
+            key: 'player_walk',
+            frames: this.anims.generateFrameNumbers('perso', {start:22,end:23}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+        this.anims.create({
+            key: 'player_chargeJump',
+            frames: this.anims.generateFrameNumbers('perso', {start:24,end:24}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+        this.anims.create({
+            key: 'player_shift',
+            frames: this.anims.generateFrameNumbers('perso', {start:25,end:25}),
+            frameRate: 2,
+            repeat : -1
+        });
+        
+        this.anims.create({
+            key: 'player_shift_walk',
+            frames: this.anims.generateFrameNumbers('perso', {start:27,end:28}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+        this.anims.create({
+            key: 'player_shoot',
+            frames: this.anims.generateFrameNumbers('perso', {start:30,end:30}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+        this.anims.create({
+            key: 'player_shift_shoot',
+            frames: this.anims.generateFrameNumbers('perso', {start:31,end:31}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+        this.anims.create({
+            key: 'player_swim',
+            frames: this.anims.generateFrameNumbers('perso', {start:32,end:33}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+        this.anims.create({
+            key: 'player_grab',
+            frames: this.anims.generateFrameNumbers('perso', {start:34,end:35}),
+            frameRate: 2,
+            repeat : -1
+        });
+
+
+
 
         //Animation Proj
         //Tong
