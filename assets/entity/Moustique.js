@@ -26,6 +26,7 @@ export class Moustique extends Entity {
         this.setCollideWorldBounds(true);
 
         //Animation
+        this.anims.play('moustique_mouv'); 
 
     }
 

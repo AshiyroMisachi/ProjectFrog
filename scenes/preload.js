@@ -202,13 +202,15 @@ export class Preload extends Phaser.Scene {
             //Guepe
             this.anims.create({
                 key: 'guepe_passif',
-                frames: [{ key: 'mobGuepe', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('mobGuepe', {start:0,end:1}),
+                frameRate: 5,
+                repeat : -1
             });
             this.anims.create({
                 key: 'guepe_agro',
-                frames: [{ key: 'mobGuepe', frame: 1 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('mobGuepe', {start:2,end:3}),
+                frameRate: 5,
+                repeat : -1
             });
 
             //Spider
@@ -221,22 +223,25 @@ export class Preload extends Phaser.Scene {
             //Sangsue
             this.anims.create({
                 key: 'sangsue_base',
-                frames: [{ key: 'mobSangsue', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('mobSangsue', {start:0,end:10}),
+                frameRate: 5,
+                repeat : -1
             });
 
             //Moustique
             this.anims.create({
                 key: 'moustique_mouv',
-                frames: [{ key: 'moustique', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('moustique', {start:0,end:6}),
+                frameRate: 5,
+                repeat : -1
             });
 
             //Escargot
             this.anims.create({
                 key: 'escargot_mouv',
-                frames: [{ key: 'escargot', frame: 0 }],
-                frameRate: 20
+                frames: this.anims.generateFrameNumbers('escargot', {start:0,end:8}),
+                frameRate: 2,
+                repeat : -1
             });
 
         }

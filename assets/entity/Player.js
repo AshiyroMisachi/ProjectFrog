@@ -189,16 +189,16 @@ export class Player extends Entity {
                                 gravityProj = 600;
                             }
                             if (this.directionX == "right" && this.inCrounch == false) {
-                                this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 64, skinProj, damageProj);
+                                this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 64, skinProj, damageProj, "right");
                             }
                             else if (this.directionX == "left" && this.inCrounch == false) {
-                                this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, skinProj, damageProj);
+                                this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 64, skinProj, damageProj, "left");
                             }
                             else if (this.directionX == "right" && this.inCrounch == true) {
-                                this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, skinProj, damageProj);
+                                this.proj = new PlayerProj(this.scene, this.x + 80, this.y - 16, skinProj, damageProj, "right");
                             }
                             else if (this.directionX == "left" && this.inCrounch == true) {
-                                this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, skinProj, damageProj);
+                                this.proj = new PlayerProj(this.scene, this.x - 80, this.y - 16, skinProj, damageProj, "left");
                             }
                             if (skinProj = "fire") {
                                 this.scene.physics.add.collider(this.proj, this.scene.breakFire, this.proj.breakFire, null, this.scene);

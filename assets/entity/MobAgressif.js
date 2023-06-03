@@ -38,36 +38,44 @@ export class MobAgressif extends Entity {
     }
 
     update() {
-        if (!this.hit) {
-            //In Agro
-            if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 600 && this.goBack == false) {
-                this.inAgro = true;
-                this.anims.play(this.animsAgro);
-                this.scene.physics.moveToObject(this, this.target, 200);
-            }
-            else if (this.inAgro) {
-                this.inAgro = false;
-                this.anims.play(this.animsPassif);
-            }
+        if (this.active) {
+            if (!this.hit) {
+                //In Agro
+                if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 600 && this.goBack == false) {
+                    this.inAgro = true;
+                    this.anims.play(this.animsAgro);
+                    this.scene.physics.moveToObject(this, this.target, 200);
+                }
+                else if (this.inAgro) {
+                    this.inAgro = false;
+                    this.anims.play(this.animsPassif);
+                }
 
-            //In Zone
-            if (Phaser.Math.Distance.Between(this.target.x, this.target.y, this.spawnX, this.spawnY) < 1000) {
-                this.inZone = true;
-            }
-            else if (this.inZone) {
-                this.inZone = false;
-            }
+                //In Zone
+                if (Phaser.Math.Distance.Between(this.target.x, this.target.y, this.spawnX, this.spawnY) < 1000) {
+                    this.inZone = true;
+                }
+                else if (this.inZone) {
+                    this.inZone = false;
+                }
 
-            //Go back
-            if ((this.inZone == false || this.inAgro == false) && this.goBack == false) {
-                this.goBack = true;
-                this.scene.time.delayedCall(1500, () => { this.goBack = false }, [], this);
-                this.scene.physics.moveTo(this, this.spawnX, this.spawnY, 500, 2000);
+                //Go back
+                if ((this.inZone == false || this.inAgro == false) && this.goBack == false) {
+                    this.goBack = true;
+                    this.scene.time.delayedCall(1500, () => { this.goBack = false }, [], this);
+                    this.scene.physics.moveTo(this, this.spawnX, this.spawnY, 500, 2000);
+                }
+            }
+            if (this.body.velocity.x <= 0) {
+                this.setFlipX(false);
+            }
+            else {
+                this.setFlipX(true);
             }
         }
     }
 
-    mobKnockback(){
+    mobKnockback() {
         this.hit = true;
         this.scene.time.delayedCall(1000, () => { this.hit = false }, [], this);
         if (this.body.touching.right) {
