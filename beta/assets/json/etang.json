@@ -612,19 +612,8 @@
                  "width":0,
                  "x":6051.15,
                  "y":1170.18
-                }, 
-                {
-                 "height":0,
-                 "id":111,
-                 "name":"Hat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"grab",
-                 "visible":true,
-                 "width":0,
-                 "x":606.061,
-                 "y":6503.03
-                }],
+                }
+                ],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
