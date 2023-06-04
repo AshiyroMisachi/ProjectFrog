@@ -73,7 +73,6 @@ export class Preload extends Phaser.Scene {
 
         this.load.image('bgEtang', '../assets/backgroungEtang.png');
         this.load.image('bgMarais', '../assets/backgroungMarais.png');
-        this.load.image('bgGrotte', '../assets/backgroungGrotte.png');
 
         //DevIMG
         this.load.image('waterCheckIMG', '../assets/waterCheck.png');
