@@ -74,6 +74,7 @@ export class SceneTemplate extends Phaser.Scene {
 
         //Placement Chapeau power_up
         this.hat = new Phaser.GameObjects.Group;
+        console.log(this.calque_placeHat)
         this.calque_placeHat.objects.forEach(spawn => {
             let poHat = null;
             if (spawn.type == "grab") {
@@ -134,6 +135,7 @@ export class SceneTemplate extends Phaser.Scene {
         //Spawn Mob
         this.calque_placeMobAgressif.objects.forEach(spawn => {
             let poMobA = null;
+            console.log(spawn)
             //MobAgro
             if (spawn.type == "guepe") {
                 poMobA = new MobAgressif(this, spawn.x, spawn.y, "mobGuepe");

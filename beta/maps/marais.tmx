@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="282" height="90" tilewidth="64" tileheight="64" infinite="0" nextlayerid="17" nextobjectid="117">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="282" height="90" tilewidth="64" tileheight="64" infinite="0" nextlayerid="17" nextobjectid="117">
  <editorsettings>
   <export target="../assets/json/marais.json" format="json"/>
  </editorsettings>
@@ -287,7 +287,7 @@
 10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10220,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10218,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219,10219
 </data>
  </layer>
- <objectgroup id="16" name="waterPoisonousCheck" visible="0">
+ <objectgroup id="16" name="waterPoisonousCheck">
   <object id="89" x="3328" y="4480" width="1344" height="1216"/>
   <object id="90" x="4672" y="4736" width="1344" height="1216"/>
   <object id="91" x="3584" y="4480" width="1344" height="1216"/>
@@ -303,141 +303,141 @@
   <object id="101" x="16000" y="4480" width="1344" height="1216"/>
   <object id="102" x="17920" y="4608" width="1344" height="1216"/>
   <object id="103" x="16796" y="4560" width="1344" height="1216"/>
-  <object id="107" type="little" x="15552" y="2112" width="640" height="320"/>
-  <object id="109" type="little" x="4608" y="1856" width="640" height="320"/>
-  <object id="110" type="little" x="4608" y="2176" width="640" height="320"/>
-  <object id="111" type="little" x="5248" y="2176" width="640" height="320"/>
-  <object id="112" type="little" x="5248" y="1856" width="640" height="320"/>
-  <object id="113" type="little" x="5888" y="1856" width="640" height="320"/>
-  <object id="114" type="little" x="5888" y="2176" width="640" height="320"/>
-  <object id="115" type="little" x="3520" y="2432" width="640" height="320"/>
-  <object id="116" type="little" x="3520" y="2752" width="640" height="320"/>
+  <object id="107" class="little" x="15552" y="2112" width="640" height="320"/>
+  <object id="109" class="little" x="4608" y="1856" width="640" height="320"/>
+  <object id="110" class="little" x="4608" y="2176" width="640" height="320"/>
+  <object id="111" class="little" x="5248" y="2176" width="640" height="320"/>
+  <object id="112" class="little" x="5248" y="1856" width="640" height="320"/>
+  <object id="113" class="little" x="5888" y="1856" width="640" height="320"/>
+  <object id="114" class="little" x="5888" y="2176" width="640" height="320"/>
+  <object id="115" class="little" x="3520" y="2432" width="640" height="320"/>
+  <object id="116" class="little" x="3520" y="2752" width="640" height="320"/>
  </objectgroup>
- <objectgroup id="10" name="waterCheck" visible="0">
+ <objectgroup id="10" name="waterCheck">
   <object id="86" x="8064" y="4480" width="1344" height="1216"/>
   <object id="87" x="9408" y="4480" width="1344" height="1216"/>
   <object id="88" x="9600" y="4480" width="1344" height="1216"/>
  </objectgroup>
- <objectgroup id="11" name="placeHat" visible="0">
-  <object id="54" name="Hat" type="fire" x="3005.33" y="4221.33">
+ <objectgroup id="11" name="placeHat">
+  <object id="54" name="Hat" class="fire" x="3005.33" y="4221.33">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="12" name="obstacle" visible="0">
-  <object id="34" name="obstacle" type="breakFire5" x="17600" y="4416" width="64" height="64"/>
-  <object id="37" name="obstacle" type="berry" x="16654" y="4142">
+ <objectgroup id="12" name="obstacle">
+  <object id="34" name="obstacle" class="breakFire5" x="17600" y="4416" width="64" height="64"/>
+  <object id="37" name="obstacle" class="berry" x="16654" y="4142">
    <point/>
   </object>
-  <object id="38" name="obstacle" type="berry" x="16712" y="4210">
+  <object id="38" name="obstacle" class="berry" x="16712" y="4210">
    <point/>
   </object>
-  <object id="39" name="obstacle" type="berry" x="16612" y="4220">
+  <object id="39" name="obstacle" class="berry" x="16612" y="4220">
    <point/>
   </object>
-  <object id="41" name="obstacle" type="berry" x="13228" y="4142">
+  <object id="41" name="obstacle" class="berry" x="13228" y="4142">
    <point/>
   </object>
-  <object id="42" name="obstacle" type="berry" x="13246" y="4214">
+  <object id="42" name="obstacle" class="berry" x="13246" y="4214">
    <point/>
   </object>
-  <object id="43" name="obstacle" type="berry" x="13318" y="4144">
+  <object id="43" name="obstacle" class="berry" x="13318" y="4144">
    <point/>
   </object>
-  <object id="47" name="obstacle" type="berry" x="6953.33" y="4202.67">
+  <object id="47" name="obstacle" class="berry" x="6953.33" y="4202.67">
    <point/>
   </object>
-  <object id="48" name="obstacle" type="berry" x="6949.33" y="4270.67">
+  <object id="48" name="obstacle" class="berry" x="6949.33" y="4270.67">
    <point/>
   </object>
-  <object id="49" name="obstacle" type="berry" x="6994.67" y="4241.33">
+  <object id="49" name="obstacle" class="berry" x="6994.67" y="4241.33">
    <point/>
   </object>
-  <object id="51" name="obstacle" type="berry" x="4661.33" y="3741.33">
+  <object id="51" name="obstacle" class="berry" x="4661.33" y="3741.33">
    <point/>
   </object>
-  <object id="52" name="obstacle" type="berry" x="4645.33" y="3825.33">
+  <object id="52" name="obstacle" class="berry" x="4645.33" y="3825.33">
    <point/>
   </object>
-  <object id="53" name="obstacle" type="berry" x="4734.67" y="3765.33">
+  <object id="53" name="obstacle" class="berry" x="4734.67" y="3765.33">
    <point/>
   </object>
-  <object id="55" name="obstacle" type="breakFire10" x="2048" y="4352" width="64" height="64"/>
-  <object id="56" name="obstacle" type="grab" x="1088" y="4416" width="64" height="64"/>
-  <object id="57" name="obstacle" type="grab" x="1088" y="4032" width="64" height="64"/>
-  <object id="58" name="obstacle" type="grab" x="1088" y="3648" width="64" height="64"/>
-  <object id="59" name="obstacle" type="berry" x="1886.67" y="3249.33">
+  <object id="55" name="obstacle" class="breakFire10" x="2048" y="4352" width="64" height="64"/>
+  <object id="56" name="obstacle" class="grab" x="1088" y="4416" width="64" height="64"/>
+  <object id="57" name="obstacle" class="grab" x="1088" y="4032" width="64" height="64"/>
+  <object id="58" name="obstacle" class="grab" x="1088" y="3648" width="64" height="64"/>
+  <object id="59" name="obstacle" class="berry" x="1886.67" y="3249.33">
    <point/>
   </object>
-  <object id="60" name="obstacle" type="berry" x="1905.33" y="3184">
+  <object id="60" name="obstacle" class="berry" x="1905.33" y="3184">
    <point/>
   </object>
-  <object id="61" name="obstacle" type="berry" x="1981.33" y="3176">
+  <object id="61" name="obstacle" class="berry" x="1981.33" y="3176">
    <point/>
   </object>
-  <object id="64" name="obstacle" type="berry" x="8152" y="2033.33">
+  <object id="64" name="obstacle" class="berry" x="8152" y="2033.33">
    <point/>
   </object>
-  <object id="65" name="obstacle" type="berry" x="8168" y="1965.33">
+  <object id="65" name="obstacle" class="berry" x="8168" y="1965.33">
    <point/>
   </object>
-  <object id="66" name="obstacle" type="berry" x="8218.67" y="2038.67">
+  <object id="66" name="obstacle" class="berry" x="8218.67" y="2038.67">
    <point/>
   </object>
-  <object id="67" name="obstacle" type="berry" x="8256" y="1980">
+  <object id="67" name="obstacle" class="berry" x="8256" y="1980">
    <point/>
   </object>
-  <object id="70" name="obstacle" type="grab" x="10496" y="3200" width="64" height="64"/>
-  <object id="71" name="obstacle" type="grab" x="10496" y="2816" width="64" height="64"/>
-  <object id="72" name="obstacle" type="grab" x="10496" y="2432" width="64" height="64"/>
-  <object id="73" name="obstacle" type="berry" x="11673.3" y="1400">
+  <object id="70" name="obstacle" class="grab" x="10496" y="3200" width="64" height="64"/>
+  <object id="71" name="obstacle" class="grab" x="10496" y="2816" width="64" height="64"/>
+  <object id="72" name="obstacle" class="grab" x="10496" y="2432" width="64" height="64"/>
+  <object id="73" name="obstacle" class="berry" x="11673.3" y="1400">
    <point/>
   </object>
-  <object id="74" name="obstacle" type="berry" x="11729.3" y="1317.33">
+  <object id="74" name="obstacle" class="berry" x="11729.3" y="1317.33">
    <point/>
   </object>
-  <object id="75" name="obstacle" type="berry" x="11737.3" y="1386.67">
+  <object id="75" name="obstacle" class="berry" x="11737.3" y="1386.67">
    <point/>
   </object>
-  <object id="77" name="obstacle" type="grab" x="13312" y="2240" width="64" height="64"/>
-  <object id="78" name="obstacle" type="grab" x="13312" y="1856" width="64" height="64"/>
-  <object id="79" name="obstacle" type="grab" x="12928" y="1536" width="64" height="64"/>
-  <object id="80" name="obstacle" type="grab" x="12928" y="1152" width="64" height="64"/>
-  <object id="82" name="obstacle" type="berry" x="15245.3" y="1433.33">
+  <object id="77" name="obstacle" class="grab" x="13312" y="2240" width="64" height="64"/>
+  <object id="78" name="obstacle" class="grab" x="13312" y="1856" width="64" height="64"/>
+  <object id="79" name="obstacle" class="grab" x="12928" y="1536" width="64" height="64"/>
+  <object id="80" name="obstacle" class="grab" x="12928" y="1152" width="64" height="64"/>
+  <object id="82" name="obstacle" class="berry" x="15245.3" y="1433.33">
    <point/>
   </object>
-  <object id="83" name="obstacle" type="berry" x="15204" y="1513.33">
+  <object id="83" name="obstacle" class="berry" x="15204" y="1513.33">
    <point/>
   </object>
-  <object id="84" name="obstacle" type="berry" x="15297.3" y="1484">
-   <point/>
-  </object>
- </objectgroup>
- <objectgroup id="13" name="mobAgressif" visible="0">
-  <object id="35" name="Mob Agressif" type="sangsue" x="17152" y="4288" width="64" height="64"/>
-  <object id="36" name="Mob Agressif" type="sangsue" x="16256" y="4288" width="64" height="64"/>
-  <object id="40" name="Mob Agressif" type="guepe" x="15006" y="3852">
-   <point/>
-  </object>
-  <object id="44" name="Mob Agressif" type="sangsue" x="12480" y="4288" width="64" height="64"/>
-  <object id="45" name="Mob Agressif" type="guepe" x="9596" y="5118">
-   <point/>
-  </object>
-  <object id="46" name="Mob Agressif" type="sangsue" x="7360" y="4288" width="64" height="64"/>
-  <object id="50" name="Mob Agressif" type="spider" x="5312" y="2752" width="64" height="64"/>
-  <object id="62" name="Mob Agressif" type="guepe" x="2586.67" y="3125.33">
-   <point/>
-  </object>
-  <object id="63" name="Mob Agressif" type="sangsue" x="6144" y="1664" width="64" height="64"/>
-  <object id="68" name="Mob Agressif" type="guepe" x="9722.67" y="2933.33">
-   <point/>
-  </object>
-  <object id="76" name="Mob Agressif" type="spider" x="13248" y="1344" width="64" height="64"/>
-  <object id="81" name="Mob Agressif" type="guepe" x="14692" y="1738.67">
-   <point/>
-  </object>
-  <object id="85" name="Mob Agressif" type="guepe" x="16438.7" y="2006.67">
+  <object id="84" name="obstacle" class="berry" x="15297.3" y="1484">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="15" name="mobPassif" visible="0"/>
+ <objectgroup id="13" name="mobAgressif">
+  <object id="35" name="Mob Agressif" class="sangsue" x="17152" y="4288" width="64" height="64"/>
+  <object id="36" name="Mob Agressif" class="sangsue" x="16256" y="4288" width="64" height="64"/>
+  <object id="40" name="Mob Agressif" class="guepe" x="15006" y="3852">
+   <point/>
+  </object>
+  <object id="44" name="Mob Agressif" class="sangsue" x="12480" y="4288" width="64" height="64"/>
+  <object id="45" name="Mob Agressif" class="guepe" x="9596" y="5118">
+   <point/>
+  </object>
+  <object id="46" name="Mob Agressif" class="sangsue" x="7360" y="4288" width="64" height="64"/>
+  <object id="50" name="Mob Agressif" class="spider" x="5312" y="2752" width="64" height="64"/>
+  <object id="62" name="Mob Agressif" class="guepe" x="2586.67" y="3125.33">
+   <point/>
+  </object>
+  <object id="63" name="Mob Agressif" class="sangsue" x="6144" y="1664" width="64" height="64"/>
+  <object id="68" name="Mob Agressif" class="guepe" x="9722.67" y="2933.33">
+   <point/>
+  </object>
+  <object id="76" name="Mob Agressif" class="spider" x="13248" y="1344" width="64" height="64"/>
+  <object id="81" name="Mob Agressif" class="guepe" x="14692" y="1738.67">
+   <point/>
+  </object>
+  <object id="85" name="Mob Agressif" class="guepe" x="16438.7" y="2006.67">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="15" name="mobPassif"/>
 </map>
