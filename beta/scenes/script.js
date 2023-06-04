@@ -25,7 +25,7 @@ var config = {
         },
     },
     fps: {target: 60, forceSetTimeOut: true},
-    pixelArt: true,
+    //pixelArt: true,
     scene: [Preload, MainScreen, SceneTest, UiScene, Scene01, Scene02, Scene03, GameWin, GameOver]
 }
 

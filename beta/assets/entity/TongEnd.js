@@ -69,9 +69,13 @@ export class TongEnd extends Entity {
             }
             if (this.targetInCrounch == false) {
                 this.y = this.target.y - 64;
+                this.tongMask.y = this.target.y - 64;
+                this.tong.y = this.target.y - 64;
             }
             else {
                 this.y = this.target.y - 2;
+                this.tongMask.y = this.target.y + 3;
+                this.tong.y = this.target.y +3 ;
             }
             if (this.movement && this.disapear == false) {
                 if (this.targetDirection == "right") {
