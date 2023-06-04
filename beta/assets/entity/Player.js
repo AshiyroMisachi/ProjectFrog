@@ -447,7 +447,7 @@ export class Player extends Entity {
         this.health -= damage
         this.getHit = true;
         if (this.health <= 0) {
-            this.respawn();
+            this.scene.scene.start("gameOver")
             console.log("respawn")
         }
         else if (entity != null) {
