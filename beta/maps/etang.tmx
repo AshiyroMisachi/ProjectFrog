@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="300" height="110" tilewidth="64" tileheight="64" infinite="0" nextlayerid="23" nextobjectid="117">
  <editorsettings>
-  <export target="../assets/json/etang.json" format="json"/>
+  <export target="../../../../../Downloads/etang.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="tileset_test" tilewidth="64" tileheight="64" tilecount="10000" columns="100">
   <image source="tileset_test.png" width="6400" height="6400"/>
