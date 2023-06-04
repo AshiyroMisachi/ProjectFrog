@@ -70,6 +70,7 @@ export class Player extends Entity {
             if (this.inWater == false) {
                 //Setup
                 this.setAngle(0);
+                this.setFlipY(false);
                 //On Plant
                 if (this.onPlant && this.currentHat == 1 && this.inAction == false) {
                     this.setGravity(0, -800);
@@ -365,14 +366,16 @@ export class Player extends Entity {
                 else if (this.directionY == "down") {
                     this.setAngle(-180);
                     this.setFlipX(false)
+                    this.setFlipY(false)
                 }
                 else if (this.directionY == "up") {
                     this.setAngle(180);
-                    this.setFlipX(false)
+                    this.setFlipY(true)
                 }
                 else {
                     this.setAngle(0);
                     this.setFlipX(false)
+                    this.setFlipY(false)
                 }
 
                 //Dash
