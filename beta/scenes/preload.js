@@ -41,7 +41,7 @@ export class Preload extends Phaser.Scene {
         this.load.spritesheet('mobSangsue', '../assets/spritesheet/sangsueSS.png',
             { frameWidth: 64, frameHeight: 160 });
 
-        this.load.spritesheet('mechan', '../assets/spritesheet/sangsueSS.png',
+        this.load.spritesheet('mechan', '../assets/spritesheet/mechanSS.png',
             { frameWidth: 254, frameHeight: 234 });
 
         this.load.spritesheet('moustique', '../assets/spritesheet/moustique.png',
@@ -65,6 +65,9 @@ export class Preload extends Phaser.Scene {
             { frameWidth: 32, frameHeight: 32 });
 
         this.load.spritesheet("spiderProj", "../assets/spiderShoot.png",
+            { frameWidth: 32, frameHeight: 32 });
+
+        this.load.spritesheet("bossProj", "../assets/projBOSS.png",
             { frameWidth: 32, frameHeight: 32 });
 
         //Image
@@ -181,65 +184,65 @@ export class Preload extends Phaser.Scene {
         //Animation Joueur
         this.anims.create({
             key: 'player_standBy',
-            frames: this.anims.generateFrameNumbers('perso', {start:20,end:21}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 20, end: 21 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
         this.anims.create({
             key: 'player_walk',
-            frames: this.anims.generateFrameNumbers('perso', {start:22,end:23}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 22, end: 23 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
         this.anims.create({
             key: 'player_chargeJump',
-            frames: this.anims.generateFrameNumbers('perso', {start:24,end:24}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 24, end: 24 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
         this.anims.create({
             key: 'player_shift',
-            frames: this.anims.generateFrameNumbers('perso', {start:25,end:25}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 25, end: 25 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
-        
+
         this.anims.create({
             key: 'player_shift_walk',
-            frames: this.anims.generateFrameNumbers('perso', {start:27,end:28}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 27, end: 28 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
         this.anims.create({
             key: 'player_shoot',
-            frames: this.anims.generateFrameNumbers('perso', {start:30,end:30}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 30, end: 30 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
         this.anims.create({
             key: 'player_shift_shoot',
-            frames: this.anims.generateFrameNumbers('perso', {start:31,end:31}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 31, end: 31 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
         this.anims.create({
             key: 'player_swim',
-            frames: this.anims.generateFrameNumbers('perso', {start:32,end:33}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 32, end: 33 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
         this.anims.create({
             key: 'player_grab',
-            frames: this.anims.generateFrameNumbers('perso', {start:34,end:35}),
+            frames: this.anims.generateFrameNumbers('perso', { start: 34, end: 35 }),
             frameRate: 2,
-            repeat : -1
+            repeat: -1
         });
 
 
@@ -278,15 +281,15 @@ export class Preload extends Phaser.Scene {
             //Guepe
             this.anims.create({
                 key: 'guepe_passif',
-                frames: this.anims.generateFrameNumbers('mobGuepe', {start:0,end:1}),
+                frames: this.anims.generateFrameNumbers('mobGuepe', { start: 0, end: 1 }),
                 frameRate: 5,
-                repeat : -1
+                repeat: -1
             });
             this.anims.create({
                 key: 'guepe_agro',
-                frames: this.anims.generateFrameNumbers('mobGuepe', {start:2,end:3}),
+                frames: this.anims.generateFrameNumbers('mobGuepe', { start: 2, end: 3 }),
                 frameRate: 5,
-                repeat : -1
+                repeat: -1
             });
 
             //Spider
@@ -299,25 +302,25 @@ export class Preload extends Phaser.Scene {
             //Sangsue
             this.anims.create({
                 key: 'sangsue_base',
-                frames: this.anims.generateFrameNumbers('mobSangsue', {start:0,end:10}),
+                frames: this.anims.generateFrameNumbers('mobSangsue', { start: 0, end: 10 }),
                 frameRate: 5,
-                repeat : -1
+                repeat: -1
             });
 
             //Moustique
             this.anims.create({
                 key: 'moustique_mouv',
-                frames: this.anims.generateFrameNumbers('moustique', {start:0,end:6}),
+                frames: this.anims.generateFrameNumbers('moustique', { start: 0, end: 6 }),
                 frameRate: 5,
-                repeat : -1
+                repeat: -1
             });
 
             //Escargot
             this.anims.create({
                 key: 'escargot_mouv',
-                frames: this.anims.generateFrameNumbers('escargot', {start:0,end:8}),
+                frames: this.anims.generateFrameNumbers('escargot', { start: 0, end: 8 }),
                 frameRate: 2,
-                repeat : -1
+                repeat: -1
             });
 
         }

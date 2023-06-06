@@ -35,9 +35,11 @@ export class MainScreen extends Phaser.Scene {
     }
 
     launchGame() {
-        this.scene.start("scene01",{
-            player_spawnX : 4112,
-            player_spawnY : 5320,
+        this.scene.start("scene03",{
+            // player_spawnX : 4112,
+            // player_spawnY : 5320,
+            player_spawnX : 11304,
+            player_spawnY : 1552,
             playerHealth : 5,
             playerInMouth: "",
             playerUnlock: [false, false, false],
