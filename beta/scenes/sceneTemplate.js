@@ -261,4 +261,23 @@ export class SceneTemplate extends Phaser.Scene {
         mob.loseHp(proj.damage);
         proj.getDestroy();
     }
+
+    //Dialogue
+    textBoxN(text){
+        this.textActive = true;
+        this.currentDialogue = this.add.image(1472/2 , 1000, "textBoxN").setScrollFactor(0).setScale(1.25).setDepth(10)
+        this.currentText = this.add.text(90, 925, text, { fontSize: '32px', fill: '#000' }).setScrollFactor(0).setDepth(11);
+    }
+
+    textBoxPerso(text){
+        this.textActive = true;
+        this.currentDialogue = this.add.image(1472/2 , 800, "textBoxPerso").setScrollFactor(0).setScale(1.25).setDepth(10)
+        this.currentText = this.add.text(90, 975, text, { fontSize: '32px', fill: '#000' }).setScrollFactor(0).setDepth(11);
+    }
+
+    textBoxMechan(text){
+        this.textActive = true;
+        this.currentDialogue = this.add.image(1472/2 , 800, "textBoxMechan").setScrollFactor(0).setScale(1.25).setDepth(10)
+        this.currentText = this.add.text(90, 975, text, { fontSize: '32px', fill: '#000' }).setScrollFactor(0).setDepth(11);
+    }
 }

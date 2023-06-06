@@ -1025,17 +1025,6 @@
                 }, 
                 {
                  "height":64,
-                 "id":64,
-                 "name":"Mob Agressif",
-                 "rotation":0,
-                 "type":"spider",
-                 "visible":true,
-                 "width":64,
-                 "x":16448,
-                 "y":4864
-                }, 
-                {
-                 "height":64,
                  "id":65,
                  "name":"Mob Agressif",
                  "rotation":0,
@@ -1141,7 +1130,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":117,
+ "nextobjectid":118,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

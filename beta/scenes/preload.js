@@ -41,6 +41,9 @@ export class Preload extends Phaser.Scene {
         this.load.spritesheet('mobSangsue', '../assets/spritesheet/sangsueSS.png',
             { frameWidth: 64, frameHeight: 160 });
 
+        this.load.spritesheet('mechan', '../assets/spritesheet/sangsueSS.png',
+            { frameWidth: 254, frameHeight: 234 });
+
         this.load.spritesheet('moustique', '../assets/spritesheet/moustique.png',
             { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('escargot', '../assets/spritesheet/escargotSS.png',
@@ -70,6 +73,10 @@ export class Preload extends Phaser.Scene {
         this.load.image("mainScreenIMG", "../assets/MainScreen.png");
         this.load.image("gameOverIMG", "../assets/GameOverScreen.png");
         this.load.image("gameWinIMG", "../assets/VictoryScreen.png");
+
+        this.load.image("textBoxN", '../assets/textBox.png');
+        this.load.image("textBoxPerso", '../assets/textBoxPerso.png');
+        this.load.image("textBoxMechan", '../assets/textBoxMechan.png');
 
         this.load.image('bgEtang', '../assets/backgroungEtang.png');
         this.load.image('bgMarais', '../assets/backgroungMarais.png');
