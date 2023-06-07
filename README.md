@@ -7,5 +7,7 @@ Touches : ZQSD -> Déplacement
           I -> Tirer 
           O -> Changer de mécaniques (une fois plusieurs chapeau récupéré)
                (Chapeau vert -> permet de grimper aux tiges de plantes, Chapeau Rouge -> Transforme les projectiles avalés en boule de feu détruisant les lianes)
+               
+Les moustiquent rendent de la vie une fois mangé, les libellules sont des plateformes volantes, le reste des mob sont des ennemies infligeant des dégâts
 
 Lien GitHub Page : https://github.com/AshiyroMisachi/Frog-s_Fight (si il ne marche pas, télécharger le .exe dans le dossier v01)
