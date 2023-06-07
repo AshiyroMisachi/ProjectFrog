@@ -5,91 +5,91 @@ export class Preload extends Phaser.Scene {
 
     preload() {
         //Map Tiled
-        this.load.image("tileset_Test", "../maps/tileset_test.png");
-        this.load.image("tileset_PlaceHolder", "../maps/tileset_placeHolder.png");
-        this.load.tilemapTiledJSON("sceneTest", "../assets/json/sceneTest.json");
-        this.load.tilemapTiledJSON("etang", "../assets/json/etang.json");
-        this.load.tilemapTiledJSON("marais", "../assets/json/marais.json");
-        this.load.tilemapTiledJSON("grotte", "../assets/json/grotte.json");
+        this.load.image("tileset_Test", "maps/tileset_test.png");
+        this.load.image("tileset_PlaceHolder", "maps/tileset_placeHolder.png");
+        this.load.tilemapTiledJSON("sceneTest", "assets/json/sceneTest.json");
+        this.load.tilemapTiledJSON("etang", "assets/json/etang.json");
+        this.load.tilemapTiledJSON("marais", "assets/json/marais.json");
+        this.load.tilemapTiledJSON("grotte", "assets/json/grotte.json");
 
         //SpriteSheet
-        this.load.spritesheet('perso', '../assets/spritesheet/persoSS.png',
+        this.load.spritesheet('perso', 'assets/spritesheet/persoSS.png',
             { frameWidth: 128, frameHeight: 256 });
-        this.load.spritesheet('tongEnd', '../assets/spritesheet/tong.png',
+        this.load.spritesheet('tongEnd', 'assets/spritesheet/tong.png',
             { frameWidth: 32, frameHeight: 32 });
-        this.load.image("tong", "../assets/spritesheet/tongL.png");
+        this.load.image("tong", "assets/spritesheet/tongL.png");
 
         //Hat
-        this.load.spritesheet('hatGrab', '../assets/spritesheet/hatGrab.png',
+        this.load.spritesheet('hatGrab', 'assets/spritesheet/hatGrab.png',
             { frameWidth: 22, frameHeight: 21 });
-        this.load.spritesheet('hatGrow', '../assets/spritesheet/hatGrow.png',
+        this.load.spritesheet('hatGrow', 'assets/spritesheet/hatGrow.png',
             { frameWidth: 22, frameHeight: 21 });
-        this.load.spritesheet('hatFire', '../assets/spritesheet/hatFire.png',
+        this.load.spritesheet('hatFire', 'assets/spritesheet/hatFire.png',
             { frameWidth: 22, frameHeight: 21 });
 
         //UI
-        this.load.spritesheet('cadreHat', '../assets/spritesheet/cadrehat.png',
+        this.load.spritesheet('cadreHat', 'assets/spritesheet/cadrehat.png',
             { frameWidth: 49, frameHeight: 48 });
-        this.load.spritesheet('healthBar', '../assets/spritesheet/healthBarSS.png',
+        this.load.spritesheet('healthBar', 'assets/spritesheet/healthBarSS.png',
             { frameWidth: 320, frameHeight: 64 });
 
         //Mob
-        this.load.spritesheet('mobGuepe', '../assets/spritesheet/guepeSS.png',
+        this.load.spritesheet('mobGuepe', 'assets/spritesheet/guepeSS.png',
             { frameWidth: 32, frameHeight: 64 });
-        this.load.spritesheet('mobSpider', '../assets/spritesheet/spiderSS.png',
+        this.load.spritesheet('mobSpider', 'assets/spritesheet/spiderSS.png',
             { frameWidth: 64, frameHeight: 64 });
-        this.load.spritesheet('mobSangsue', '../assets/spritesheet/sangsueSS.png',
+        this.load.spritesheet('mobSangsue', 'assets/spritesheet/sangsueSS.png',
             { frameWidth: 64, frameHeight: 160 });
 
-        this.load.spritesheet('mechan', '../assets/spritesheet/mechanSS.png',
+        this.load.spritesheet('mechan', 'assets/spritesheet/mechanSS.png',
             { frameWidth: 254, frameHeight: 234 });
 
-        this.load.spritesheet('moustique', '../assets/spritesheet/moustique.png',
+        this.load.spritesheet('moustique', 'assets/spritesheet/moustique.png',
             { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('escargot', '../assets/spritesheet/escargotSS.png',
+        this.load.spritesheet('escargot', 'assets/spritesheet/escargotSS.png',
             { frameWidth: 192, frameHeight: 64 });
 
         //Texture Obstacle
-        this.load.image("plantGrab", "../assets/planteGrab.png");
-        this.load.image("breakFire", "../assets/breakFire.png");
-        this.load.image("breakFire12", "../assets/breakFire12.png");
-        this.load.image("breakFire10", "../assets/breakFire10.png");
-        this.load.image("breakFire5", "../assets/breakFire5.png");
-        this.load.image("berry", "../assets/berry.png");
-        this.load.image("ronces", "../assets/ronces.png");
+        this.load.image("plantGrab", "assets/planteGrab.png");
+        this.load.image("breakFire", "assets/breakFire.png");
+        this.load.image("breakFire12", "assets/breakFire12.png");
+        this.load.image("breakFire10", "assets/breakFire10.png");
+        this.load.image("breakFire5", "assets/breakFire5.png");
+        this.load.image("berry", "assets/berry.png");
+        this.load.image("ronces", "assets/ronces.png");
 
         //Texture Proj
-        this.load.spritesheet("fire", "../assets/fire.png",
+        this.load.spritesheet("fire", "assets/fire.png",
             { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet("berryShoot", "../assets/berry.png",
-            { frameWidth: 32, frameHeight: 32 });
-
-        this.load.spritesheet("spiderProj", "../assets/spiderShoot.png",
+        this.load.spritesheet("berryShoot", "assets/berry.png",
             { frameWidth: 32, frameHeight: 32 });
 
-        this.load.spritesheet("bossProj", "../assets/projBOSS.png",
+        this.load.spritesheet("spiderProj", "assets/spiderShoot.png",
+            { frameWidth: 32, frameHeight: 32 });
+
+        this.load.spritesheet("bossProj", "assets/projBOSS.png",
             { frameWidth: 32, frameHeight: 32 });
 
         //Image
-        this.load.image('logoMainScreen', "../assets/logoMainScreen.png");
-        this.load.image('launchGame', "../assets/launchGame.png");
-        this.load.image("mainScreenIMG", "../assets/MainScreen.png");
-        this.load.image("gameOverIMG", "../assets/GameOverScreen.png");
-        this.load.image("gameWinIMG", "../assets/VictoryScreen.png");
+        this.load.image('logoMainScreen', "assets/logoMainScreen.png");
+        this.load.image('launchGame', "assets/launchGame.png");
+        this.load.image("mainScreenIMG", "assets/MainScreen.png");
+        this.load.image("gameOverIMG", "assets/GameOverScreen.png");
+        this.load.image("gameWinIMG", "assets/VictoryScreen.png");
 
-        this.load.image("textBoxN", '../assets/textBox.png');
-        this.load.image("textBoxPerso", '../assets/textBoxPerso.png');
-        this.load.image("textBoxMechan", '../assets/textBoxMechan.png');
+        this.load.image("textBoxN", 'assets/textBox.png');
+        this.load.image("textBoxPerso", 'assets/textBoxPerso.png');
+        this.load.image("textBoxMechan", 'assets/textBoxMechan.png');
 
-        this.load.image('bgEtang', '../assets/backgroungEtang.png');
-        this.load.image('bgMarais', '../assets/backgroungMarais.png');
-        this.load.image('bgGrotte', '../assets/backgroungGrotte.png');
+        this.load.image('bgEtang', 'assets/backgroungEtang.png');
+        this.load.image('bgMarais', 'assets/backgroungMarais.png');
+        this.load.image('bgGrotte', 'assets/backgroungGrotte.png');
 
         //DevIMG
-        this.load.image('waterCheckIMG', '../assets/waterCheck.png');
-        this.load.image('waterCheckLittleIMG', '../assets/waterCheckLittle.png');
-        this.load.image('Travel5', '../assets/Travel5.png');
-        this.load.image('Travel8', '../assets/Travel8.png');
+        this.load.image('waterCheckIMG', 'assets/waterCheck.png');
+        this.load.image('waterCheckLittleIMG', 'assets/waterCheckLittle.png');
+        this.load.image('Travel5', 'assets/Travel5.png');
+        this.load.image('Travel8', 'assets/Travel8.png');
     }
 
     create() {
