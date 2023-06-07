@@ -19,7 +19,7 @@ export class SceneTemplate extends Phaser.Scene {
 
         //Chargement Calques Tuiles
         this.background = this.carteDuNiveau.createLayer("fond", this.tileset).setDepth(-2);
-        this.water = this.carteDuNiveau.createLayer("eau", this.tileset).setDepth(2);
+        this.water = this.carteDuNiveau.createLayer("eau", this.tileset).setDepth(-2);
         this.wall = this.carteDuNiveau.createLayer("base", this.tileset).setDepth(-2);
         
 
