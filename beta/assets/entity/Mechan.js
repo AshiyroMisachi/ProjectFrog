@@ -44,13 +44,13 @@ export class Mechan extends Entity {
             if (this.cdTp){
                 //TP
                 this.cdTp = false;
-                this.scene.time.delayedCall(5000, ()=> { this.cdTp = true }, [], this);
+                this.scene.time.delayedCall(6000, ()=> { this.cdTp = true }, [], this);
                 var i = Math.floor(Math.random() * (4 - 0) ) + 0;
                 this.setPosition(this.coordX[i], this.coordY[i])
 
                 //Shoot
                 this.shoot = new BossProj(this.scene, this.x, this.y)
-                this.scene.physics.moveToObject(this.shoot, this.target, 350);
+                this.scene.physics.moveToObject(this.shoot, this.target, 300);
                 this.scene.physics.add.overlap(this.target, this.shoot, ()=> { this.shoot.getDestroy();this.target.playerLoseHp(1)}, null, this)
             }
         }

@@ -34,8 +34,9 @@ export class MainScreen extends Phaser.Scene {
 
     }
 
+    //Lancement Basiquement
     launchGame() {
-        this.scene.start("scene03",{
+        this.scene.start("scene01",{
             // player_spawnX : 4112,
             // player_spawnY : 5320,
             player_spawnX : 11304,
@@ -43,6 +44,22 @@ export class MainScreen extends Phaser.Scene {
             playerHealth : 5,
             playerInMouth: "",
             playerUnlock: [false, false, false],
+            playerCurrentHat: 0
+        });
+    }
+
+    //Fin Marais
+
+    //Début Grotte
+
+    //Boss Room
+    launchBoss(){
+        this.scene.start("scene03",{
+            player_spawnX : 11304,
+            player_spawnY : 1552,
+            playerHealth : 5,
+            playerInMouth: "",
+            playerUnlock: [true, false, true],
             playerCurrentHat: 0
         });
     }
