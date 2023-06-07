@@ -437,7 +437,7 @@
                  "visible":true,
                  "width":0,
                  "x":3160,
-                 "y":1646.66666666667
+                 "y":1646.67
                 }, 
                 {
                  "height":0,
@@ -448,8 +448,8 @@
                  "type":"berry",
                  "visible":true,
                  "width":0,
-                 "x":3225.33333333333,
-                 "y":1593.33333333333
+                 "x":3225.33,
+                 "y":1593.33
                 }, 
                 {
                  "height":0,
@@ -460,7 +460,7 @@
                  "type":"berry",
                  "visible":true,
                  "width":0,
-                 "x":3277.33333333333,
+                 "x":3277.33,
                  "y":1596
                 }, 
                 {
@@ -473,7 +473,7 @@
                  "visible":true,
                  "width":0,
                  "x":1364,
-                 "y":1766.66666666667
+                 "y":1766.67
                 }, 
                 {
                  "height":0,
@@ -485,7 +485,7 @@
                  "visible":true,
                  "width":0,
                  "x":1412,
-                 "y":1697.33333333333
+                 "y":1697.33
                 }, 
                 {
                  "height":0,
@@ -496,8 +496,8 @@
                  "type":"berry",
                  "visible":true,
                  "width":0,
-                 "x":1314.66666666667,
-                 "y":1714.66666666667
+                 "x":1314.67,
+                 "y":1714.67
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -600,7 +600,67 @@
          "draworder":"topdown",
          "id":15,
          "name":"mobPassif",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "id":56,
+                 "name":"MobPassif",
+                 "point":true,
+                 "rotation":0,
+                 "type":"moustiqueA",
+                 "visible":true,
+                 "width":0,
+                 "x":12312,
+                 "y":1476
+                }, 
+                {
+                 "height":0,
+                 "id":57,
+                 "name":"MobPassif",
+                 "point":true,
+                 "rotation":0,
+                 "type":"moustiqueA",
+                 "visible":true,
+                 "width":0,
+                 "x":12728,
+                 "y":1696
+                }, 
+                {
+                 "height":0,
+                 "id":58,
+                 "name":"MobPassif",
+                 "point":true,
+                 "rotation":0,
+                 "type":"moustiqueA",
+                 "visible":true,
+                 "width":0,
+                 "x":12996,
+                 "y":1620
+                }, 
+                {
+                 "height":0,
+                 "id":59,
+                 "name":"MobPassif",
+                 "point":true,
+                 "rotation":0,
+                 "type":"moustiqueA",
+                 "visible":true,
+                 "width":0,
+                 "x":8244,
+                 "y":1668
+                }, 
+                {
+                 "height":0,
+                 "id":60,
+                 "name":"MobPassif",
+                 "point":true,
+                 "rotation":0,
+                 "type":"moustiqueA",
+                 "visible":true,
+                 "width":0,
+                 "x":3500,
+                 "y":3020
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -608,7 +668,7 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":50,
+ "nextobjectid":61,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

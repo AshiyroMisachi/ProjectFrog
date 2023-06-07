@@ -27,6 +27,9 @@ export class UiScene extends Phaser.Scene
 		this.healthBar = this.physics.add.sprite(480, 60, "healthBar").setScale(1.5);
 		this.healthBar.anims.play("5");
 		eventsCenter.on('updateHealth', this.updateHealth, this);
+
+		eventsCenter.on('show_UI', this.showUI, this);
+		eventsCenter.on('hide_UI', this.hideUI, this);
 	}
 
 	switchHat(currentHat) {
@@ -63,5 +66,15 @@ export class UiScene extends Phaser.Scene
 		else if (currentHealth == 0){
 			this.healthBar.anims.play("0");
 		}
+	}
+
+	hideUI(){
+		this.cadre.setVisible(false);
+		this.healthBar.setVisible(false);
+	}
+
+	showUI(){
+		this.cadre.setVisible(true);
+		this.healthBar.setVisible(true);
 	}
 }

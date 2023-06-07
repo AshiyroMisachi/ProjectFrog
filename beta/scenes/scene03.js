@@ -1,5 +1,6 @@
 import { Mechan } from "../assets/entity/Mechan.js";
 import { SceneTemplate } from "./sceneTemplate.js";
+import { eventsCenter } from "./script.js";
 export class Scene03 extends SceneTemplate {
     constructor() {
         super("scene03");
@@ -72,6 +73,7 @@ export class Scene03 extends SceneTemplate {
     }
 
     update() {
+        eventsCenter.emit('show_UI');
         if (this.textActive == true) {
             this.player.inAction = true;
             this.physics.pause();

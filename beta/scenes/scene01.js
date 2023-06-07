@@ -1,4 +1,5 @@
 import { SceneTemplate } from "./sceneTemplate.js";
+import { eventsCenter } from "./script.js";
 export class Scene01 extends SceneTemplate {
     constructor() {
         super("scene01");
@@ -78,9 +79,11 @@ export class Scene01 extends SceneTemplate {
             this.checkDia02.destroy();
             this.textBoxPerso(this.diaPerso03);
         }, null, this);
+
     }
 
     update() {
+        eventsCenter.emit('show_UI');
         if (this.textActive == true){
             this.player.inAction = true;
             this.physics.pause();

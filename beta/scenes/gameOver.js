@@ -1,3 +1,4 @@
+import { eventsCenter } from "./script.js";
 export class GameOver extends Phaser.Scene {
     constructor() {
         super({
@@ -21,6 +22,7 @@ export class GameOver extends Phaser.Scene {
     }
 
     update(){  
+        eventsCenter.emit('hide_UI');
         if (this.cursors.space.isDown){
             this.launchGame()
         }
