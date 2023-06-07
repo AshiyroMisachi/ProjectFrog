@@ -10,4 +10,4 @@ Touches : ZQSD -> Déplacement
                
 Les moustiquent rendent de la vie une fois mangé, les libellules sont des plateformes volantes, le reste des mob sont des ennemies infligeant des dégâts
 
-Lien GitHub Page : https://github.com/AshiyroMisachi/Frog-s_Fight (si il ne marche pas, télécharger le .exe dans le dossier v01)
+.exe à téléchargé dans les releases
