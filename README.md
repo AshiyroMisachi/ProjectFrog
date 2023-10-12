@@ -9,6 +9,6 @@ Touches : ZQSD -> Déplacement
                (Chapeau vert -> permet de grimper aux tiges de plantes, Chapeau Rouge -> Transforme les projectiles avalés en boule de feu détruisant les lianes)
           E -> Passez les dialogues
                
-Les moustiquent rendent de la vie une fois mangé, les libellules sont des plateformes volantes, le reste des mob sont des ennemies infligeant des dégâts
+Les moustiques rendent de la vie une fois mangé, les libellules sont des plateformes volantes, le reste des mob sont des ennemies infligeant des dégâts
 
 .exe à téléchargé dans les releases
